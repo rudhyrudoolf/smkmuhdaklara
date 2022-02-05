@@ -2,39 +2,47 @@
 
 namespace App\Controllers;
 
+use \App\Models\AuthModel;
+
+
 class Login extends BaseController
 {
     public $data = [];
     
-    
+    protected $authModel;
+    protected $db;
 
-    public function __constructor()
+    public function __construct()
     {
-        $this->load->helper('form');
-        $this->load->helper('url');   
-        $this->load->library('session');
-        
+        $this->authModel = new AuthModel();
+        //$this->db = \Config\Database::connect();
+
     }
+    
 
     public function index()
     {
         $data = ['title'=> 'Login | SMAMUHDAKLARA'];
+
         return view('login',$data);
     }
 
     public function auth()
     {
         $session = session();   
+        
         $data = [
-            'email' => $this->request->getVar('email'),
+            'username' => $this->request->getVar('username'),
             'password' => $this->request->getVar('pwd')
         ];
-        //dd($data['email']);
 
-        if($data['email'] == 'admin@admin.com' && $data['password']=='admin')
+        $data = $this->authModel->getUserAuth($data['username'],$data['password']);
+        //dd($data);
+
+        if($data != null)
         {
             $ses_data = [
-                    'userid' => 'Admin',
+                    'userid' => $data->nama,
                     'logged_in' => TRUE
 
             ];
