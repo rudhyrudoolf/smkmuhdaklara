@@ -17,11 +17,16 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <div style="display: flex; justify-content: space-between;">
-                <h6 class="m-0 font-weight-bold text-primary">Data Nasabah</h6>
-                <button type="button" class="btn btn-primary" id="btnAddModal" data-target="#modalNasabah">
-                    <i class="fas fa-plus"></i>
-                </button>
+            <h6 class="m-0 font-weight-bold text-primary">Data Transaksi</h6>
+            <div style="display: flex; justify-content: end;">
+                <div id="btnsubmit" style="display: inline-block;">
+                    <button type="button" class="btn btn-danger" id="btnTarikTunaiModal">
+                        <span>Tarik Tunai</span>
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnSetorTunaiModal">
+                        <span>Setor Tunai</span>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -50,11 +55,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalNasabah" tabindex="-1" role="dialog" aria-labelledby="nasabahlabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
+<div class="modal fade" id="modaltransaksi" tabindex="-1" role="dialog" aria-labelledby="transaksilabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="nasabahlabel"></h5>
+                <h5 class="modal-title" id="transaksilabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -62,11 +67,16 @@
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="selectJenistab">Nomor Rekening</label>
-                        <select class="form-select form-control " id="selectJenistab" name="txtjenistabungan" aria-label="Default select example">
-                            <option selected>Pilih</option>
+                        <label class="form-label">Nomor Rekening</label>
+                        <div class="form-control-wrap w-300px">
 
-                        </select>
+                            <select class="form-select form-control was-validated" id="inputNorek" name="txtNorek" aria-label="Default select example" required>
+                            </select>
+                            <div class="invalid-feedback">
+                                error
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
@@ -82,21 +92,24 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputnnis">Jenis Tabungan</label>
-                        <input type="text" class="form-control" id="inputnis" name="txtnis" placeholder="NIS" disabled>
+                        <label for="inputjenistabungan">Jenis Tabungan</label>
+                        <input type="text" class="form-control" id="inputjenistabungan" name="txtjenisTabungan" placeholder="Jenis Tabungan" disabled>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputnnis">Jumlah Setor Tunai</label>
-                        <input type="email" class="form-control" id="inputnama" name="txtnama" placeholder="Nama" disabled>
+                        <label for="inputnominal" id="lblnominal"></label>
+                        <input type="text" onkeypress="return onlyNumber(event)" class="form-control was-validated" id="inputnominal" name="txtjmlnominal" placeholder="Jumlah" required>
+
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputJenisKelamin">Sandi</label>
-                        <select class="form-select form-control " id="inputJenisKelamin" name="txtjenisKelamin" aria-label="Default select example">
+                        <label for="inputsandi">Sandi</label>
+                        <select class="form-select form-control " id="inputsandi" name="txtsandi" aria-label="Default select example">
                             <option selected>Pilih</option>
-
+                            <?php foreach ($sandi as $row) : ?>
+                                <option value="<?= $row['systemCode'] ?>"><?= $row['systemDesc'] ?></option>
+                            <?php endforeach ?>
                         </select>
                     </div>
                 </div>
@@ -117,4 +130,11 @@
         </div>
     </div>
 </div>
+
+
+
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('/assets/js/transaksi.js') ?>"></script>
 <?= $this->endSection() ?>

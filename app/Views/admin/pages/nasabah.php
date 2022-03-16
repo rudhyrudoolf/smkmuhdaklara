@@ -60,14 +60,14 @@
                 <td hidden><?= $row['jkCode'] ?></td>
                 <td><?= $row['tahunMasuk'] ?></td>
                 <td hidden><?= $row['id'] ?></td>
-                <td>
-                  <button type="button" id="btnview" class="btn btn-info">
+                <td style="width: 15vh;">
+                  <button type="button" id="btnview" class="btn btn-sm btn-info">
                     <i class="fas fa-eye"></i>
                   </button>
-                  <button type=" button" id="btnEdit" class="btn btn-primary">
+                  <button type="button" id="btnEdit" class="btn btn-sm btn-primary">
                     <i class="fas fa-edit"></i>
                   </button>
-                  <button type=" button" id="btnDelete" class="btn btn-danger">
+                  <button type="button" id="btnDelete" class="btn btn-sm btn-danger">
                     <i class="fas fa-trash"></i>
                   </button>
                 </td>
@@ -156,4 +156,7 @@
     </div>
   </div>
 </div>
+<?= $this->endSection() ?>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('/assets/js/demo/datatables-demo.js') ?>"></script>
 <?= $this->endSection() ?>

@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use CodeIgniter\Database\SQLite3\Table;
 use CodeIgniter\Model;
 
 class NasabahModel extends Model
@@ -38,27 +39,29 @@ class NasabahModel extends Model
 
     public function getData($param = false)
     {
+        $query = "
+        select 
+            tmn.id,
+            tmn.nis,
+            tmn.jenis_tabungan jtCode,
+            ts.systemDesc as jenis_tabungan,
+            tmn.nomor_rekening,
+            tmn.Nama,
+            tmn.Alamat,
+            ts2.systemDesc as jenis_kelamin,
+            tmn.jenis_kelamin jkCode,
+            tmn.tanggal_masuk  as tahunMasuk
+        from TB_M_NASABAH tmn 
+        INNER JOIN tblsystem ts ON tmn.jenis_tabungan = ts.systemCode AND ts.systemType = 'dropdown_jenis_tabungan' 
+        INNER JOIN tblsystem ts2 ON tmn.jenis_kelamin = ts2.systemCode AND ts2.systemType = 'dropdown_jenis_kelamin' 
+        ";
         if (!$param) {
-            $query = "
-            select 
-                tmn.id,
-                tmn.nis,
-                tmn.jenis_tabungan jtCode,
-                ts.systemDesc as jenis_tabungan,
-                tmn.nomor_rekening,
-                tmn.Nama,
-                tmn.Alamat,
-                ts2.systemDesc as jenis_kelamin,
-                tmn.jenis_kelamin jkCode,
-                tmn.tanggal_masuk  as tahunMasuk
-            from TB_M_NASABAH tmn 
-            INNER JOIN tblsystem ts ON tmn.jenis_tabungan = ts.systemCode AND ts.systemType = 'dropdown_jenis_tabungan' 
-            INNER JOIN tblsystem ts2 ON tmn.jenis_kelamin = ts2.systemCode AND ts2.systemType = 'dropdown_jenis_kelamin' 
-            ";
 
             $data = $this->db->query($query)->getResultArray();
-        } else
-            $data = $this->where('id', $param)->findAll();
+        } else {
+            $query = $query . " Where tmn.id = :id:";
+            $data = $this->query($query, ["id" => $param])->getResultArray();
+        }
 
         return $data;
     }
@@ -93,5 +96,18 @@ class NasabahModel extends Model
 
         $data = $this->save($data);
         return $data;
+    }
+
+    public function getDataRekening($params)
+    {
+        $data = $this->like('nomor_rekening', $params)->findAll();
+        $list = [];
+        $key = 0;
+        foreach ($data as $row) :
+            $list[$key]['id'] = $row['id'];
+            $list[$key]['text'] = $row['nomor_rekening'];
+            $key++;
+        endforeach;
+        return $list;
     }
 }

@@ -36,6 +36,11 @@ $routes->get('/home', 'Home::index', ['filter' => 'auth']);
 $routes->get('/nasabah', 'admin\MasterNasabah::index', ['filter' => 'auth']);
 $routes->post('/nasabah/save', 'admin\MasterNasabah::savedata');
 $routes->get('/transaksi', 'admin\Transaksi::index');
+$routes->get('/transaksi/getrekening', 'admin\Transaksi::getrekening');
+$routes->get('/transaksi/getdetailnasabah', 'admin\Transaksi::getdetailnasabah');
+$routes->post('/transaksi/savedata', 'admin\Transaksi::savedata');
+
+
 
 
 

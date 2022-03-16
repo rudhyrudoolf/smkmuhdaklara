@@ -14,11 +14,13 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('/assets/lib/select2/css/select2.min.css') ?>" rel="stylesheet" />
+
 
     <?= $this->renderSection('styles') ?>
 </head>
 
-<body id="page-top">
+<body id=" page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -86,7 +88,9 @@
     <!-- Page level plugins -->
     <script src="<?= base_url('/assets/vendor/datatables/jquery.dataTables.min.js') ?>"></script>
     <script src="<?= base_url('/assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
-    <script src="<?= base_url('/assets/js/demo/datatables-demo.js') ?>"></script>
+    <script src="<?= base_url('/assets/lib/select2/js/select2.min.js') ?>"></script>
+    <script src="<?= base_url('/assets/lib/bootbox/js/bootbox.min.js') ?>"></script>
+
     <script type="text/javascript">
         var BASE_URL = "<?= base_url() ?>"
     </script>
