@@ -14,11 +14,13 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('/assets/lib/select2/css/select2.min.css') ?>" rel="stylesheet" />
+
 
     <?= $this->renderSection('styles') ?>
 </head>
 
-<body id="page-top">
+<body id=" page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
@@ -47,6 +49,28 @@
             <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a href="<?= base_url('/login/logout') ?>" class="btn btn-primary" href="logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
@@ -64,7 +88,9 @@
     <!-- Page level plugins -->
     <script src="<?= base_url('/assets/vendor/datatables/jquery.dataTables.min.js') ?>"></script>
     <script src="<?= base_url('/assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
-    <script src="<?= base_url('/assets/js/demo/datatables-demo.js') ?>"></script>
+    <script src="<?= base_url('/assets/lib/select2/js/select2.min.js') ?>"></script>
+    <script src="<?= base_url('/assets/lib/bootbox/js/bootbox.min.js') ?>"></script>
+
     <script type="text/javascript">
         var BASE_URL = "<?= base_url() ?>"
     </script>

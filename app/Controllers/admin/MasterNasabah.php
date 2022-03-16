@@ -65,6 +65,7 @@ class MasterNasabah extends BaseController
             $norek = "3030" . strval(substr($nis, -4)) . strval($this->request->getPost('thMasuk'));
 
             $params = [
+                'id' => $this->request->getPost('id'),
                 'nis' => $nis,
                 'nama' => $this->request->getPost('nama'),
                 'jenis_tabungan' => $this->request->getPost('jt'),
@@ -75,9 +76,10 @@ class MasterNasabah extends BaseController
                 'created_by' => session()->get('userid')
             ];
 
-
-            $data = $this->nasabahModel->savedata($params);
-
+            if ($this->request->getPost('flag') == 'insert')
+                $data = $this->nasabahModel->savedata($params);
+            else
+                $data = $this->nasabahModel->editdata($params);
             if (!$data) {
                 //session()->setFlashdata('pesan', 'Error! data tidak gagal di simpan');
                 $response = [
@@ -92,13 +94,15 @@ class MasterNasabah extends BaseController
                 ];
             }
 
-            return json_encode($response);
+            echo json_encode($response);
+            die;
         } catch (Exception $ex) {
             $response = [
                 'title' => 'success',
                 'content' => $ex->getMessage()
             ];
-            return $response;
+            echo json_encode($response);
+            die;
         }
     }
 }

@@ -32,12 +32,15 @@
             <tr>
               <th>#</th>
               <th>NIS</th>
+              <th hidden>JT</th>
               <th>Jenis Tabungan</th>
               <th>NomorRekening</th>
               <th>Nama</th>
               <th>Alamat</th>
               <th>Jenis Kelamin</th>
+              <th hidden>JK</th>
               <th>Tahun Masuk</th>
+              <th hidden></th>
               <th>Aksi</th>
           </thead>
           <tbody>
@@ -45,15 +48,29 @@
             $no = 1;
             foreach ($listNasabah as $row) : ?>
               <tr>
+
                 <td><?= $no++ ?></td>
                 <td><?= $row['nis'] ?></td>
+                <td hidden><?= $row['jtCode'] ?></td>
                 <td><?= $row['jenis_tabungan'] ?></td>
                 <td><?= $row['nomor_rekening'] ?></td>
                 <td><?= $row['Nama'] ?></td>
                 <td><?= $row['Alamat'] ?></td>
                 <td><?= $row['jenis_kelamin'] ?></td>
+                <td hidden><?= $row['jkCode'] ?></td>
                 <td><?= $row['tahunMasuk'] ?></td>
-                <td></td>
+                <td hidden><?= $row['id'] ?></td>
+                <td style="width: 15vh;">
+                  <button type="button" id="btnview" class="btn btn-sm btn-info">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button type="button" id="btnEdit" class="btn btn-sm btn-primary">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button type="button" id="btnDelete" class="btn btn-sm btn-danger">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
               </tr>
             <?php endforeach; ?>
           </tbody>
@@ -91,7 +108,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="inputNorek">Nomor Rekening</label>
-            <input type="password" class="form-control" id="inputnorek" name="txtnorek" placeholder="Nomor Rekening" disabled>
+            <input type="text" class="form-control" id="inputnorek" name="txtnorek" placeholder="Nomor Rekening" disabled>
           </div>
         </div>
         <div class="form-row">
@@ -139,4 +156,7 @@
     </div>
   </div>
 </div>
+<?= $this->endSection() ?>
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('/assets/js/demo/datatables-demo.js') ?>"></script>
 <?= $this->endSection() ?>
