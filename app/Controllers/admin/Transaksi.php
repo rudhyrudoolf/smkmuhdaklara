@@ -34,6 +34,7 @@ class Transaksi extends BaseController
     {
         $data = [
             'title' => 'system',
+            'listTransaksi' => $this->transaksiModel->getdata(),
             'sandi' => $this->dropdownsandi
         ];
 
@@ -65,23 +66,23 @@ class Transaksi extends BaseController
 
         if ($this->request->getPost('flag') == 'insert')
             $data = $this->transaksiModel->addData($params);
-        // // else
-        // //     $data = $this->transaksiModel->editdata($params);
+        else
+            $data = $this->transaksiModel->editdata($params);
 
-        // if (!$data) {
+        if (!$data) {
 
-        //     $response = [
-        //         'title' => 'error',
-        //         'content' => $data
-        //     ];
-        // } else {
-        //     $response = [
-        //         'title' => 'success',
-        //         'content' => $data
-        //     ];
-        // }
+            $response = [
+                'title' => 'error',
+                'content' => $data
+            ];
+        } else {
+            $response = [
+                'title' => 'success',
+                'content' => $data
+            ];
+        }
 
-        echo json_encode($data);
+        echo json_encode($response);
         die;
     }
 }

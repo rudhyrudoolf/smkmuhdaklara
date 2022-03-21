@@ -9,24 +9,24 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item active" id="barDashboard">
         <a class="nav-link" href="<?= base_url('home') ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" id="sideDropdown" href="#" data-toggle="collapse" data-target="#collapseNasabah" aria-expanded="true" aria-controls="collapseNasabah">
             <i class="fas fa-fw fa-cog"></i>
             <span>Master data</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseNasabah" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="<?= base_url('nasabah') ?>">Nasabah</a>
             </div>
         </div>
     </li>
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    <li class="nav-item" id="barTransaksi">
         <a class="nav-link" href="<?= base_url('transaksi') ?>">
             <i class="fas fa-fw fa-table"></i>
             <span>Transaksi</span></a>

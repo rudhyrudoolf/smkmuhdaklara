@@ -1,11 +1,40 @@
 var flag;
 var flaginput;
-
+var table;
 $(document).ready(function(){
-    
+    activesidebar()
+    $("#tbltransaksi").DataTable();
+    table = $("#tbltransaksi").DataTable();
     Init();
+    EventMessage()
     // $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 })
+
+function EventMessage()
+{
+    if(localStorage.getItem("success"))
+    {
+        // let item = JSON.parse(localStorage.getItem("success"));
+
+        // console.log(item);
+        $('#alert-text-success').text("Data Transaksi Berhasil Di Tambahkan");
+        $('#add-alert-success').show();
+    }else if(localStorage.getItem("error"))
+    {
+        $('#alert-text-danger').text("Data Transaksi Gagal Di Tambahkan");
+        $('#show-alert-danger').show();
+    }
+    localStorage.removeItem("success");
+    localStorage.removeItem("error");
+}
+
+function activesidebar()
+{
+
+    $("#sideDropdown").addClass('collapsed');
+    $("#barTransaksi").addClass('active');
+    $("#barDashboard").removeClass('active');
+}
 
 function Init()
 {
@@ -101,7 +130,17 @@ $("#savedata").click(function(){
             dataType: "Json",
             success: function (response) {
                 console.log(JSON.stringify(response))
-            }
+            
+                debugger;
+                if(response.content)
+                {
+                    let myObj = response;
+                    localStorage.setItem("success",JSON.stringify(myObj))
+                }else{
+                    localStorage.setItem("error",response);
+                }
+                window.location.reload(); 
+                    }
         });
     }
 })
@@ -164,3 +203,27 @@ function clear()
     $("#inputjenistabungan").val('');
     $("#inputnominal").val('');
 }
+
+$('#tbltransaksi tbody').on('click', '#btnEdit', function () {
+    flag = "update";
+    var data_row = table.row( $(this).parents('tr') ).data(); // here is the change
+    console.log(data_row);
+   $("#modaltransaksi").modal('show');
+  
+   $('#modaltransaksi').on('shown.bs.modal', function() {
+  
+    //  $("select[name=txtjenistabungan]").val(data_row[2]).attr('readonly',true);
+        $("#inputnorek").val(data_row[9]).trigger('change');
+        $('#inputnis').val(data_row[1])
+    //   $('#inputnorek').val(data_row[4]).attr('readonly',true);
+        $('#inputnama').val(data_row[2]).attr('readonly',false);
+        $('#inputnominal').val(data_row[3] == 0 ? data_row[4] : data_row[3]).attr('readonly',false);
+        $("#inputsandi").val(data_row[6]);
+    //   $('#inputthnmasuk').val(data_row[9]).attr('readonly',true);
+  
+     
+    //   id = data_row[10];
+    //   $('#savedata').show();
+   });
+  
+  });
