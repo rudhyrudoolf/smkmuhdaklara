@@ -49,4 +49,13 @@ class TransaksiModel extends Model
         $data = $this->save($data);
         return $data;
     }
+
+    public function getdata()
+    {
+        $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,t.nomor_rekening as norek ,t.created_by ,t.created_dt  from transaksi t
+        INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis";
+
+        $data = $this->db->query($query)->getResultArray();
+        return $data;
+    }
 }

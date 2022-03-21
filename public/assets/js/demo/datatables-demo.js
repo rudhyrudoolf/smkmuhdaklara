@@ -20,9 +20,16 @@ $(document).ready(function() {
   }
   localStorage.removeItem("success");
   localStorage.removeItem("error");
-
+  activesidebar();
 });
 
+function activesidebar()
+{
+    $("#sideDropdown").removeClass('collapsed');
+    $("#collapseNasabah").addClass('show');
+    $("#barTransaksi").removeClass('active');
+    $("#barDashboard").removeClass('active');
+}
 
 $("#btnAddModal").click(function() {
   func.clearField();
@@ -35,7 +42,7 @@ $("#savedata").click(function() {
   // console.log(func.params()); return;
   $.ajax({
       type: "POST",
-      url: BASE_URL+'/nasabah/save' ,
+      url: BASE_URL+'/nasabah/save',
       data: func.params() ,
       dataType:"Json",
       beforeSend:function(){

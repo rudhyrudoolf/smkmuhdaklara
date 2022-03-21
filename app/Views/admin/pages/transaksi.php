@@ -32,22 +32,44 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="tblnasabah" class="display" style="width:100%" cellspacing="0">
+                <table class="table table-bordered" id="tbltransaksi" class="display" style="width:100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Kode Transaksi</th>
                             <th>NIS</th>
                             <th>Nama</th>
                             <th>Debit</th>
                             <th>Kredit</th>
                             <th>Saldo</th>
+                            <th>Sandi</th>
                             <th>Petugas</th>
                             <th>Tanggal</th>
+                            <th style="display: none;">norek</th>
                             <th>Aksi</th>
                     </thead>
                     <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($listTransaksi as $row) : ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $row['nis'] ?></td>
+                                <td><?= $row['nama'] ?></td>
+                                <td><?= $row['debit'] ?></td>
+                                <td><?= $row['kredit'] ?></td>
+                                <td><?= $row['saldo'] ?></td>
+                                <td><?= $row['sandi'] ?></td>
+                                <td><?= $row['created_by'] ?></td>
+                                <td><?= $row['created_dt'] ?></td>
+                                <td style="display: none;"><?= $row['norek'] ?></td>
 
+                                <td>
+                                    <button type="button" id="btnEdit" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
