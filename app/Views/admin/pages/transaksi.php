@@ -46,6 +46,7 @@
                             <th>Tanggal</th>
                             <th style="display: none;">norek</th>
                             <th>Aksi</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <?php
@@ -55,9 +56,9 @@
                                 <td><?= $no++ ?></td>
                                 <td><?= $row['nis'] ?></td>
                                 <td><?= $row['nama'] ?></td>
-                                <td><?= $row['debit'] ?></td>
-                                <td><?= $row['kredit'] ?></td>
-                                <td><?= $row['saldo'] ?></td>
+                                <td><?= number_format($row['debit'], 2, ',', '.') ?></td>
+                                <td><?= number_format($row['kredit'], 2, ',', '.') ?></td>
+                                <td><?= number_format($row['saldo'], 2, ',', '.') ?></td>
                                 <td><?= $row['sandi'] ?></td>
                                 <td><?= $row['created_by'] ?></td>
                                 <td><?= $row['created_dt'] ?></td>
@@ -71,6 +72,16 @@
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3" style="background-color: gray;"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th colspan="5" style="background-color: gray;"></th>
+
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -91,13 +102,7 @@
                     <div class="form-group col-md-12">
                         <label class="form-label">Nomor Rekening</label>
                         <div class="form-control-wrap w-300px">
-
-                            <select class="form-select form-control was-validated" id="inputNorek" name="txtNorek" aria-label="Default select example" required>
-                            </select>
-                            <div class="invalid-feedback">
-                                error
-                            </div>
-
+                            <select class="form-select form-control-lg dest-select2" id="inputNorek" name="txtNorek">`</select>
                         </div>
                     </div>
                 </div>

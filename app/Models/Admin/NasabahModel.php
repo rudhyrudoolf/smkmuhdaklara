@@ -98,9 +98,9 @@ class NasabahModel extends Model
         return $data;
     }
 
-    public function getDataRekening($params)
+    public function getDataRekening()
     {
-        $data = $this->like('nomor_rekening', $params)->findAll();
+        $data = $this->findAll();
         $list = [];
         $key = 0;
         foreach ($data as $row) :
@@ -109,5 +109,14 @@ class NasabahModel extends Model
             $key++;
         endforeach;
         return $list;
+    }
+
+    public function gettotalNasabah()
+    {
+
+        $query = "SELECT count(1) totalnasabah FROM  TB_M_NASABAH tmn";
+
+        $result = $this->db->query($query);
+        return $result->getFirstRow();
     }
 }

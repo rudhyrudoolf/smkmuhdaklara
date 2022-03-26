@@ -52,10 +52,48 @@ class TransaksiModel extends Model
 
     public function getdata()
     {
-        $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,t.nomor_rekening as norek ,t.created_by ,t.created_dt  from transaksi t
+        $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,tmn.id as norek ,t.created_by ,t.created_dt  from transaksi t
         INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis";
 
         $data = $this->db->query($query)->getResultArray();
         return $data;
+    }
+
+    public function getdetailData($periodFrom, $periodTo)
+    {
+        $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,tmn.id as norek ,t.created_by ,t.created_dt  from transaksi t
+        INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
+        WHERE CAST(t.created_dt AS DATE) between ? ANd ?";
+
+        $data = $this->db->query($query, [$periodFrom, $periodTo])->getResultArray();
+        return $data;
+    }
+
+    public function getsaldoTransaksi($periodTo, $periodFrom)
+    {
+
+        $query = "select SUM(kredit)-SUM(debit) as saldo from transaksi t 
+        WHERE created_dt BETWEEN ? AND ?";
+
+        $result = $this->db->query($query, [$periodTo, $periodFrom]);
+        return $result->getFirstRow();
+    }
+    public function getKreditTransaksi($periodTo, $periodFrom)
+    {
+
+        $query = "select SUM(kredit) as kredit from transaksi t 
+        WHERE created_dt BETWEEN ? AND ?";
+
+        $result = $this->db->query($query, [$periodTo, $periodFrom]);
+        return $result->getFirstRow();
+    }
+    public function getDebitTransaksi($periodTo, $periodFrom)
+    {
+
+        $query = "select SUM(debit) as debit from transaksi t 
+        WHERE created_dt BETWEEN ? AND ?";
+
+        $result = $this->db->query($query, [$periodTo, $periodFrom]);
+        return $result->getFirstRow();
     }
 }

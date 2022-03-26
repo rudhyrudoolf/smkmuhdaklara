@@ -1,6 +1,7 @@
 var flag;
 var flaginput;
 var table;
+var data = [];
 $(document).ready(function(){
     activesidebar()
     $("#tbltransaksi").DataTable();
@@ -31,37 +32,33 @@ function EventMessage()
 function activesidebar()
 {
 
-    $("#sideDropdown").addClass('collapsed');
+    $("#sideDropdown2").removeClass('collapsed');
+    $("#collapseTabungan").addClass('show');
     $("#barTransaksi").addClass('active');
     $("#barDashboard").removeClass('active');
+    $("#barMutasi").removeClass('active');
+    $("#barInfoSaldo").removeClass('active');
 }
 
 function Init()
 {
-    $('#inputNorek').select2({
-        maximumInputLength:3,
-        dropdownParent: $('#modaltransaksi'),
-        allowClear: true,
-        placeholder: "pilih",
-        width: '100%',
-        heigth: '10%',  
-        ajax : { 
-            url: BASE_URL+'/transaksi/getrekening',
-            delay: 500,
-            dataType: "json",
-            data: function(params){
-                return {
-                    search: params.term
-                }
-            },
-            processResults: function (data,page) {
-                return{
-                    results : data
-                }
-            }
+   
+    $.ajax({
+        type: "GET",
+        url: BASE_URL+'/transaksi/getrekening',
+        data: "",
+        dataType: "json",
+        success: function (response) {
+            $('#inputNorek').select2({
+                dropdownParent: $('#modaltransaksi'),
+                allowClear: true,
+                placeholder: "pilih",
+                width: '100%',
+                data:response
+            });
         }
-
     });
+    
 }
 
 function onlyNumber(event)
@@ -98,6 +95,7 @@ $("#btnSetorTunaiModal").click(function(){
     $("#lblnominal").text('Jumlah Setor Tunai');
     $("#transaksilabel").text('Setor Tunai');
     $("#inputsandi").val('1').prop('disabled',true)
+    $("#inputNorek").prop('disabled',false);
 });
 
 $("#btnTarikTunaiModal").click(function(){
@@ -107,8 +105,8 @@ $("#btnTarikTunaiModal").click(function(){
     $("#modaltransaksi").modal('show');
     $("#lblnominal").text('Jumlah Tarik Tunai');
     $("#transaksilabel").text('Tarik Tunai');
-    $("#inputsandi").val('2').prop('disabled',true)
-
+    $("#inputsandi").val('2').prop('disabled',true);
+    $("#inputNorek").prop('disabled',false);
 })
 
 $("#savedata").click(function(){
@@ -211,19 +209,18 @@ $('#tbltransaksi tbody').on('click', '#btnEdit', function () {
    $("#modaltransaksi").modal('show');
   
    $('#modaltransaksi').on('shown.bs.modal', function() {
-  
-    //  $("select[name=txtjenistabungan]").val(data_row[2]).attr('readonly',true);
-        $("#inputnorek").val(data_row[9]).trigger('change');
+
+        $("#inputNorek").val(data_row[9]).trigger("change");
+        $("#inputNorek").prop('disabled',true);
+        $("#inputNorek").change(function() {
+            console.log('on country change');
+            });
         $('#inputnis').val(data_row[1])
-    //   $('#inputnorek').val(data_row[4]).attr('readonly',true);
         $('#inputnama').val(data_row[2]).attr('readonly',false);
         $('#inputnominal').val(data_row[3] == 0 ? data_row[4] : data_row[3]).attr('readonly',false);
         $("#inputsandi").val(data_row[6]);
-    //   $('#inputthnmasuk').val(data_row[9]).attr('readonly',true);
-  
-     
-    //   id = data_row[10];
-    //   $('#savedata').show();
+
+        
    });
   
   });

@@ -15,7 +15,13 @@
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('/assets/lib/select2/css/select2.min.css') ?>" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .pull-left {
+            float: left !important;
+        }
+    </style>
 
     <?= $this->renderSection('styles') ?>
 </head>
@@ -88,8 +94,11 @@
     <!-- Page level plugins -->
     <script src="<?= base_url('/assets/vendor/datatables/jquery.dataTables.min.js') ?>"></script>
     <script src="<?= base_url('/assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
-    <script src="<?= base_url('/assets/lib/select2/js/select2.min.js') ?>"></script>
+    <script src="<?= base_url('/assets/lib/select2/js/select2.js') ?>"></script>
     <script src="<?= base_url('/assets/lib/bootbox/js/bootbox.min.js') ?>"></script>
+    <script src="<?= base_url('/assets/js/shared/global.js') ?>"></script>
+    <script src="<?= base_url('/assets/js/shared/dataTables.rowsGroup.js') ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="text/javascript">
         var BASE_URL = "<?= base_url() ?>"
