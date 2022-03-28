@@ -6,6 +6,41 @@
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
     </div>
     <!-- Content Row -->
+
+    <div class="row">
+        <div class="col-xl-6 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase col-md-4">
+                            Periode
+                        </div>
+                        <form>
+                            <div class="form-row align-items-center">
+                                <div class="col-auto">
+                                    <label class="sr-only" for="periodFrom">Period From</label>
+                                    <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom" value="<?= $periodFrom ?>">
+                                </div>
+                                <span>-</span>
+                                <div class="col-auto">
+                                    <label class="sr-only" for="periodTo">Period To</label>
+                                    <div class="input-group mb-2">
+                                        <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $periodTo ?>">
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" id="searchData" class="btn btn-primary">cari</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <hr>
     <div class="row">
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -14,12 +49,14 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Earnings (Monthly)
+                                total Nasabah
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalnasabah"><?= $totalnasabah->totalnasabah ?></div>
+                            <hr>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><a href="#">Lihat Detail</a></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            <i class="fas fa-user fa-4x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -32,12 +69,12 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Earnings (Annual)
+                                Total debit
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalDebit"><?= number_format($debit->debit, 2, ',', '.'); ?></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <i class="fas fa-credit-card fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -49,21 +86,16 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Kredit
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="totalKredit"><?= number_format($kredit->kredit, 2, ',', '.'); ?></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            <i class="fas fa-credit-card fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -76,12 +108,14 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Pending Requests
+                                Total Saldo
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalsaldo"><?= number_format($saldo->saldo, 2, ',', '.'); ?></div>
+                            <hr>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><a href="#">Lihat Detail</a></div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            <i class="fas fa-dollar-sign fa-4x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -90,4 +124,8 @@
     </div>
     <!-- Content Row -->
 </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script src="<?= base_url('/assets/js/dashboard.js') ?>"></script>
 <?= $this->endSection() ?>

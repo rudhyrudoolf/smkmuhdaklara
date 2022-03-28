@@ -25,11 +25,18 @@
             </div>
         </div>
     </li>
-    <!-- Nav Item - Tables -->
-    <li class="nav-item" id="barTransaksi">
-        <a class="nav-link" href="<?= base_url('transaksi') ?>">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Transaksi</span></a>
+    <li class="nav-item">
+        <a class="nav-link collapsed" id="sideDropdown2" href="#" data-toggle="collapse" data-target="#collapseTabungan" aria-expanded="true" aria-controls="collapseNasabah">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Tabungan</span>
+        </a>
+        <div id="collapseTabungan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" id="barInfoSaldo" href="<?= base_url('infosaldo') ?>">Info Saldo</a>
+                <a class="collapse-item" id="barTransaksi" href="<?= base_url('transaksi') ?>">Transaksi</a>
+                <a class="collapse-item" id="barMutasi" href="<?= base_url('mutasi') ?>">Mutasi</a>
+            </div>
+        </div>
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->

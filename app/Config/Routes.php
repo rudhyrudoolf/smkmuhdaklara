@@ -33,13 +33,16 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Login::index', ['filter' => 'auth']);
 $routes->get('/home', 'Home::index', ['filter' => 'auth']);
+$routes->get('/home/filter', 'Home::searchdata', ['filter' => 'auth']);
 $routes->get('/nasabah', 'admin\MasterNasabah::index', ['filter' => 'auth']);
 $routes->post('/nasabah/save', 'admin\MasterNasabah::savedata');
+$routes->get('/infosaldo', 'admin\InfoSaldo::index', ['filter' => 'auth']);
 $routes->get('/transaksi', 'admin\Transaksi::index', ['filter' => 'auth']);
 $routes->get('/transaksi/getrekening', 'admin\Transaksi::getrekening');
 $routes->get('/transaksi/getdetailnasabah', 'admin\Transaksi::getdetailnasabah');
 $routes->post('/transaksi/savedata', 'admin\Transaksi::savedata');
-
+$routes->get('/mutasi', 'admin\Mutasi::index', ['filter' => 'auth']);
+$routes->get('/transaksi/searchdata', 'admin\InfoSaldo::searchData', ['filter' => 'auth']);
 
 
 

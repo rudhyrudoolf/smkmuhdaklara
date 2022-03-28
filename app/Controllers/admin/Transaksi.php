@@ -41,15 +41,11 @@ class Transaksi extends BaseController
         return view('admin/pages/transaksi', $data);
     }
 
+
+
     public function getrekening()
     {
-
-
-        $searchdata = $this->request->getGet('search');
-
-        // dd($searchdata);
-
-        $data = $this->nasabahModel->getDataRekening($searchdata);
+        $data = $this->nasabahModel->getDataRekening();
         echo json_encode($data);
     }
 
