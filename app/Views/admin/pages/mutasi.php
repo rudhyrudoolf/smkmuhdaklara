@@ -16,102 +16,59 @@
         <strong>Oops!</strong> <span id="alert-text-danger"></span>
     </div>
 
-    <!-- <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="form-label font-weight-bold  ">Nomor Rekening</label>
-                    <div class="form-control-wrap">
-                        <select class="form-select form-control-lg dest-select2 " id="inputNorek" name="txtNorek">`</select>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="row no-gutters align-items-center col-md-6 form-group">
-                    <div class="font-weight-bold  col-md-4   ">
-                        Periode harian
-                    </div>
-                    <div class="form-row align-items-center ">
-                        <div class="col-auto">
-                            <label class="sr-only" for="periodFrom">Period From</label>
-                            <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom" value="<?= $periodFrom ?>">
-                        </div>
-                        <span>-</span>
-                        <div class="col-auto">
-                            <label class="sr-only" for="periodTo">Period To</label>
-                            <div class="input-group mb-2">
-                                <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $periodTo ?>">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div id="btnsubmit" style="display: inline-block;">
-                <button type="button" class="btn btn-primary" id="savedata">Cari</button>
-                <button type="button" class="btn btn-info" id="savedata">Export</button>
-                <button type="button" class="btn btn-success" id="savedata">Print</button>
-            </div>
-        </div>
-    </div> -->
-
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form class="needs-validation" novalidate>
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label for="inputNorek">Nomor rekening</label>
-                        <input class="form-control" id="inputNorek" placeholder="First name" required>
-                        <div class="valid-feedback ">
-                            Looks good!
-                        </div>
+            <form>
+                <div class="form-row align-items-center">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase col-md-1">
+                        <p class="text-center">rekening</p>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="validationCustom02">Nis</label>
-                        <input type="text" class="form-control" id="validationCustom02" disabled required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                    <div class="col-md-3 mb-3">
+                        <input class="form-control" id="inputNorek" required>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="validationCustomUsername">Nama</label>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase col-md-1">
+                        <p class="text-center">NIS</p>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <input type="text" class="form-control" id="inputnis" disabled required>
+                    </div>
+                    <div class="text-xs font-weight-bold text-primary pull-right text-uppercase col-md-1">
+                        <p class="text-center">nama</p>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="validationCustomUsername" disabled aria-describedby="inputGroupPrepend" required>
-                            <div class="invalid-feedback">
-                                Please choose a username.
-                            </div>
+                            <input type="text" class="form-control" id="inputnama" disabled aria-describedby="inputGroupPrepend" required>
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row align-items-center">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase col-md-1">
+                        <p class="text-center"> Periode </p>
+                    </div>
+                    <div class="col-auto">
+                        <label class="sr-only" for="periodFrom">Period From</label>
+                        <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom" value="<?= $period ?>">
+                    </div>
+                    <span>-</span>
+                    <div class="col-auto">
+                        <label class="sr-only" for="periodTo">Period To</label>
+                        <div class="input-group mb-2">
+                            <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $period ?>">
+                        </div>
+                    </div>
 
+                    <div class="text-xs font-weight-bold text-primary text-uppercase col-md-2">
+                        <p class="text-center"> Kode Transaksi Terakhir </p>
+                    </div>
                     <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Period Harian</label>
-                        <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
+                        <input type="text" class="form-control" id="kodetransaksi">
                         <div class="invalid-feedback">
                             Please provide a valid state.
                         </div>
                     </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationCustom05">Period Harian</label>
-                        <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid zip.
-                        </div>
-                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                        <label class="form-check-label" for="invalidCheck">
-                            Agree to terms and conditions
-                        </label>
-                        <div class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-primary btn-icon-split">
+                <br>
+                <button type="button" id="searchData" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-search"></i>
                     </span>
@@ -123,12 +80,12 @@
                     </span>
                     <span class="text">Cetak</span>
                 </button>
-                <button class="btn btn-success btn-icon-split">
+                <!-- <button class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-file"></i>
                     </span>
                     <span class="text">Export</span>
-                </button>
+                </button> -->
             </form>
         </div>
     </div>

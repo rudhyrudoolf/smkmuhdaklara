@@ -15,6 +15,35 @@
         </button>
         <strong>Oops!</strong> <span id="alert-text-danger"></span>
     </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="text-xs font-weight-bold text-primary text-uppercase col-md-1">
+                    Periode
+                </div>
+                <form>
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <label class="sr-only" for="periodFrom">Period From</label>
+                            <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom">
+                        </div>
+                        <span>-</span>
+                        <div class="col-auto">
+                            <label class="sr-only" for="periodTo">Period To</label>
+                            <div class="input-group mb-2">
+                                <input class="form-control datepicker" id="periodTo" name="txtperidoTo">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" id="searchData" class="btn btn-primary">cari</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data Transaksi</h6>
@@ -72,16 +101,6 @@
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="3" style="background-color: gray;"></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th colspan="5" style="background-color: gray;"></th>
-
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>

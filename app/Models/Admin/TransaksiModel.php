@@ -73,7 +73,7 @@ class TransaksiModel extends Model
     {
 
         $query = "select SUM(kredit)-SUM(debit) as saldo from transaksi t 
-        WHERE created_dt BETWEEN ? AND ?";
+        WHERE CAST(created_dt as DATE) BETWEEN ? AND ?";
 
         $result = $this->db->query($query, [$periodTo, $periodFrom]);
         return $result->getFirstRow();
@@ -82,7 +82,7 @@ class TransaksiModel extends Model
     {
 
         $query = "select SUM(kredit) as kredit from transaksi t 
-        WHERE created_dt BETWEEN ? AND ?";
+        WHERE CAST(created_dt as DATE) BETWEEN ? AND ?";
 
         $result = $this->db->query($query, [$periodTo, $periodFrom]);
         return $result->getFirstRow();
@@ -91,9 +91,19 @@ class TransaksiModel extends Model
     {
 
         $query = "select SUM(debit) as debit from transaksi t 
-        WHERE created_dt BETWEEN ? AND ?";
+        WHERE CAST(created_dt as DATE) BETWEEN ? AND ?";
 
         $result = $this->db->query($query, [$periodTo, $periodFrom]);
         return $result->getFirstRow();
+    }
+
+    public function searchDataMutasi($norek, $kodeTransaksi)
+    {
+        $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,t.nomor_rekening as norek ,t.created_by ,t.created_dt  from transaksi t
+        INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
+        WHERE t.nomor_rekening = ? AND t.idtransaksi > ?";
+
+        $data = $this->db->query($query, [$norek, $kodeTransaksi])->getResultArray();
+        return $data;
     }
 }

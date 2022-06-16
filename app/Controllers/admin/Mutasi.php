@@ -27,14 +27,22 @@ class Mutasi extends BaseController
     }
     public function index()
     {
-        $periodfrom  = date('Y-m-d', strtotime('-7 day', strtotime($this->date)));
-        $periodTo = $this->date;
+        $period = $this->date;
 
         $data = [
             'title' => 'Mutasi',
-            'periodFrom' => $periodfrom,
-            'periodTo' => $periodTo
+            'period' => $period
         ];
         return view('admin/pages/mutasi', $data);
+    }
+
+    public function searchData()
+    {
+        $norek = $this->request->getGet('norek');
+        $kodeTransaksi = $this->request->getGet('kodeTransaksi');
+        $data = $this->transaksiModel->searchDataMutasi($norek, $kodeTransaksi);
+
+        echo json_encode($data);
+        die;
     }
 }
