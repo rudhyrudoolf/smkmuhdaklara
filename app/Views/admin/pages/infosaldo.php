@@ -15,37 +15,36 @@
         </button>
         <strong>Oops!</strong> <span id="alert-text-danger"></span>
     </div>
-    <div class="col-md-8">
+    <div class="card shadow mb-4">
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="text-xs font-weight-bold text-primary text-uppercase col-md-1">
                     Periode
                 </div>
-                <form>
-                    <div class="form-row align-items-center">
-                        <div class="col-auto">
-                            <label class="sr-only" for="periodFrom">Period From</label>
-                            <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom" value="<?= $periodFrom ?>">
-                        </div>
-                        <span>-</span>
-                        <div class="col-auto">
-                            <label class="sr-only" for="periodTo">Period To</label>
-                            <div class="input-group mb-2">
-                                <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $periodTo ?>">
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <button type="button" id="searchData" class="btn btn-primary">cari</button>
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label class="sr-only" for="periodFrom">Period From</label>
+                        <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom" value="<?= $periodFrom ?>">
+                    </div>
+                    <span>-</span>
+                    <div class="col-auto">
+                        <label class="sr-only" for="periodTo">Period To</label>
+                        <div class="input-group mb-2">
+                            <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $periodTo ?>">
                         </div>
                     </div>
+                    <div class="col-auto">
+                        <button type="button" id="searchData" class="btn btn-primary">cari</button>
+                    </div>
+                </div>
                 </form>
             </div>
         </div>
     </div>
-    <hr>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Transaksi</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Detail Saldo</h6>
         </div>
 
         <div class="card-body">
