@@ -72,7 +72,7 @@ class TransaksiModel extends Model
     public function getsaldoTransaksi($periodTo, $periodFrom)
     {
 
-        $query = "select SUM(kredit)-SUM(debit) as saldo from transaksi t 
+        $query = "select IFNULL(SUM(kredit)-SUM(debit),0) as saldo from transaksi t 
         WHERE CAST(created_dt as DATE) BETWEEN ? AND ?";
 
         $result = $this->db->query($query, [$periodTo, $periodFrom]);
@@ -81,7 +81,7 @@ class TransaksiModel extends Model
     public function getKreditTransaksi($periodTo, $periodFrom)
     {
 
-        $query = "select SUM(kredit) as kredit from transaksi t 
+        $query = "select IFNULL(SUM(kredit),0) as kredit from transaksi t 
         WHERE CAST(created_dt as DATE) BETWEEN ? AND ?";
 
         $result = $this->db->query($query, [$periodTo, $periodFrom]);
@@ -90,7 +90,7 @@ class TransaksiModel extends Model
     public function getDebitTransaksi($periodTo, $periodFrom)
     {
 
-        $query = "select SUM(debit) as debit from transaksi t 
+        $query = "select IFNULL(SUM(debit),0) as debit from transaksi t 
         WHERE CAST(created_dt as DATE) BETWEEN ? AND ?";
 
         $result = $this->db->query($query, [$periodTo, $periodFrom]);
