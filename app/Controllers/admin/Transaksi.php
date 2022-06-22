@@ -7,6 +7,8 @@ use CodeIgniter\HTTP\IncomingRequest;
 use App\Models\Admin\NasabahModel;
 use App\Models\Admin\SystemModel;
 use App\Models\Admin\TransaksiModel;
+use DateTime;
+use DateTimeZone;
 
 /**
  * @property IncomingRequest $request;
@@ -28,19 +30,40 @@ class Transaksi extends BaseController
         $this->transaksiModel = new TransaksiModel();
 
         $this->dropdownsandi = $this->systemModel->getDataSystem($this->paramDropdownsandi);
+
+        $myTime = new DateTime();
+        $myTime->setTimezone(new DateTimeZone('asia/jakarta'));
+
+        $this->date = strval($myTime->format("Y-m-d"));
     }
 
     public function index()
     {
+        $periodfrom  = date('Y-m-d', strtotime('-7 day', strtotime($this->date)));
+        $periodTo = $this->date;
+
         $data = [
             'title' => 'system',
-            'listTransaksi' => $this->transaksiModel->getdata(),
+            'periodFrom' => $periodfrom,
+            'periodTo' => $periodTo,
+            'listTransaksi' => $this->transaksiModel->getdata($periodfrom,$periodTo),
             'sandi' => $this->dropdownsandi
         ];
 
         return view('admin/pages/transaksi', $data);
     }
 
+    public function Searchdata()
+    {
+        $periodfrom = $this->request->getGet('periodFrom');
+        $periodTo = $this->request->getGet('periodTo');
+
+        $data = [
+            'listTransaksi' => $this->transaksiModel->getdata($periodfrom,$periodTo)
+        ];
+
+        echo json_encode($data);
+    }
 
 
     public function getrekening()

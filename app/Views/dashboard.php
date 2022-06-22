@@ -53,7 +53,7 @@
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalnasabah"><?= $totalnasabah->totalnasabah ?></div>
                             <hr>
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><a href="#">Lihat Detail</a></div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><a href="<?= base_url('nasabah')?>">Lihat Detail</a></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-user fa-4x text-gray-300"></i>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalsaldo"><?= number_format($saldo->saldo, 2, ',', '.'); ?></div>
                             <hr>
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><a href="#">Lihat Detail</a></div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><button class="btn btn-xs btn-primary"  id="viewdetailsaldo">Lihat Detail</button></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-4x text-gray-300"></i>

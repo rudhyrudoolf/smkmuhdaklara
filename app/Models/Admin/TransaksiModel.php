@@ -50,12 +50,13 @@ class TransaksiModel extends Model
         return $data;
     }
 
-    public function getdata()
+    public function getdata($periodFrom,$periodTo)
     {
         $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,tmn.id as norek ,t.created_by ,t.created_dt  from transaksi t
-        INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis";
+        INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
+        WHERE CAST(t.created_dt AS DATE) between ? ANd ?";
 
-        $data = $this->db->query($query)->getResultArray();
+        $data = $this->db->query($query,[$periodFrom, $periodTo])->getResultArray();
         return $data;
     }
 
@@ -63,7 +64,8 @@ class TransaksiModel extends Model
     {
         $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,tmn.id as norek ,t.created_by ,t.created_dt  from transaksi t
         INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
-        WHERE CAST(t.created_dt AS DATE) between ? ANd ?";
+        WHERE CAST(t.created_dt AS DATE) between ? ANd ? 
+        ORDER BY tmn.nama";
 
         $data = $this->db->query($query, [$periodFrom, $periodTo])->getResultArray();
         return $data;

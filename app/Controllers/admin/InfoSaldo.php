@@ -26,18 +26,47 @@ class Infosaldo extends BaseController
 
         $this->date = strval($myTime->format("Y-m-d"));
     }
-    public function index()
+    public function index($paramperiodFrom = '',$paramperiodTo = '')
     {
-        $periodfrom  = date('Y-m-d', strtotime('-7 day', strtotime($this->date)));
-        $periodTo = $this->date;
+        
 
-        $data = [
-            'title' => 'Info Saldo',
-            'periodFrom' => $periodfrom,
-            'periodTo' => $periodTo
-        ];
+        if(empty($paramperiodFrom) && empty($paramperiodTo)){
+
+            $periodfrom  = date('Y-m-d', strtotime('-7 day', strtotime($this->date)));
+            $periodTo = $this->date;
+            dd($paramperiodFrom);
+            
+            $data = [
+                'title' => 'Info Saldo',
+                'periodFrom' => $periodfrom,
+                'periodTo' => $periodTo
+            ];
+        }else{
+            // dd($paramperiodFrom);
+            $totalsaldo = $this->transaksiModel->getsaldoTransaksi($paramperiodFrom, $paramperiodTo);
+            $totalkredit = $this->transaksiModel->getKreditTransaksi($paramperiodFrom, $paramperiodTo);
+            $totaldebit = $this->transaksiModel->getDebitTransaksi($paramperiodFrom, $paramperiodTo);
+            $data = $this->transaksiModel->getdetailData($paramperiodFrom, $paramperiodTo);
+            
+            $data = [
+                'title' => 'Info Saldo',
+                'periodFrom' => $paramperiodFrom,
+                'periodTo' => $paramperiodTo,
+                'listdata' => $data,
+                'kredit' => $totalkredit,
+                'debit' => $totaldebit,
+                'saldo' => $totalsaldo
+            ];
+        
+        }
+
+       
 
         return view('admin/pages/infosaldo', $data);
+    }
+
+    public function Coba1($param = '',$param2 = ''){
+        dd($param. ' '. $param2);
     }
 
     public function searchData()
