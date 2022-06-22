@@ -1,13 +1,25 @@
 var flag;
 var flaginput;
 var table;
-var data = [];
+var data = [], listTransaksi =[];
 $(document).ready(function(){
+
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd ',
+        todayHighlight: true,
+
+    });
+
     activesidebar()
-    $("#tbltransaksi").DataTable();
-    table = $("#tbltransaksi").DataTable();
+    // $("#tbltransaksi").DataTable();
+    // table = $("#tbltransaksi").DataTable();
+
+    TransaksiTable.Init("#tbltransaksi");
     Init();
     EventMessage()
+
+    GetData.Init();
+
     // $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 })
 
@@ -129,16 +141,22 @@ $("#savedata").click(function(){
             success: function (response) {
                 console.log(JSON.stringify(response))
             
-                debugger;
-                if(response.content)
-                {
-                    let myObj = response;
-                    localStorage.setItem("success",JSON.stringify(myObj))
-                }else{
-                    localStorage.setItem("error",response);
+                $("#modaltransaksi").modal('hide');
+                GetData.Init();
+                Swal.fire({
+                    title: 'Success!',
+                    text: "Data Berhasil Di simpan",
+                    icon: 'success',
+                    position: "bottom-end",
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },  
+                    footer: '<a href="'+BASE_URL+'/mutasi'+'">Cetak Buku</a>'
+                  });
                 }
-                window.location.reload(); 
-                    }
         });
     }
 })
@@ -224,3 +242,195 @@ $('#tbltransaksi tbody').on('click', '#btnEdit', function () {
    });
   
   });
+
+  $("#searchData").click(function () { 
+    var periodFrom = $("#periodFrom").val();
+    var periodTo = $("#periodTo").val();
+ 
+    debugger
+ 
+    if(periodFrom>periodTo)
+    {
+     bootbox.alert({
+         title : "<p style='color:red'>Warning!</p>",
+         message: "Periode tidak valid"
+     });
+     return true;
+    }
+    $.ajax({
+        type: "GET",
+        url: BASE_URL+'/transaksi/filter',
+        data: {
+            periodFrom:periodFrom,
+            periodTo:periodTo
+        },
+        dataType: "JSON",
+        success: function (response) {
+            console.log('success')
+            console.log(response)
+            TransaksiTable.DataBind(response.listTransaksi);
+ 
+        },
+        error: function(data){
+            console.log('error')
+            console.log(data)
+        }
+    });
+    
+ });
+
+ var GetData = {
+    Init: function(){
+        var periodFrom = $("#periodFrom").val();
+        var periodTo = $("#periodTo").val();
+
+        $.ajax({
+            type: "GET",
+            url: BASE_URL+'/transaksi/filter',
+            data: {
+                periodFrom:periodFrom,
+                periodTo:periodTo
+            },
+            dataType: "JSON",
+            success: function (response) {
+                console.log('success')
+                console.log(response)
+                TransaksiTable.DataBind(response.listTransaksi);
+     
+            },
+            error: function(data){
+                console.log('error')
+                console.log(data)
+            }
+        });
+
+    }
+ }
+ 
+ var TransaksiTable = {
+    Init: function (elm, opt) {
+        debugger
+        if ($(elm) !== 'undefined') {
+            $(elm).each(function () {
+                var auto_responsive = $(this).data('auto-responsive');
+                var def = {
+                    responsive: true,
+                    autoWidth: false,
+                    dom: '<"row justify-between g-2"<"col-7 col-sm-6 text-right"<"datatables-filter pull-left"f>><"col-5 col-sm-6 text-right"<"datatable-filter"l>>><"datatable-wrap my-3"t><"row align-items-left"<"col-5 col-sm-12 col-md-3"i><"col-7 col-sm-12 col-md-9 text-left text-md-right"p>>',
+                    language: {
+                        search: "Search",
+                        searchPlaceholder: "Type in to Search",
+                        // lengthMenu: "<span class='d-none d-sm-inline-block'>Show</span><div class='form-control-select'> _MENU_ </div>",
+                        info: "_START_ -_END_ of _TOTAL_",
+                        infoEmpty: "No records found",
+                        paginate: {
+                            "first": "First",
+                            "last": "Last",
+                            "next": "Next",
+                            "previous": "Prev"
+                        },
+                        infoFiltered: "( Total _MAX_  )"
+                    },
+                    "paging": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "rowCallback": function (row, data) {
+                        $(row).addClass('nk-tb-item');
+                    },
+                    "oSearch": { "bSmart": false, "bRegex": true },
+                    "columns": [
+                        {
+                            data: null,
+                            className: "nk-tb-col tb-col-xs text-left",
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                return meta.row + 1;
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                debugger
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.nis) ? row.nis : '') + '</span>';
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.nama) ? row.nama : '') + '</span>';
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.debit) ? row.debit : 0) + '</span>';
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.kredit) ? row.kredit : 0) + '</span>';
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.saldo) ? row.saldo : 0) + '</span>';
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.sandi) ? row.sandi : '') + '</span>';
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.created_by) ? row.created_by : '') + '</span>';
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
+                            render: function (data, type, row, meta) {
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.created_dt) ? row.created_dt : '') + '</span>';
+                            }
+                        },
+                        {
+                            //width: '10vw',
+                            data: null,
+                            "className": "nk-tb-col text-center",
+                            render: function (data, type, row) {
+                               
+                                var html = '<button type="button" id="searchData" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i</button>';
+                                return html;
+                            }
+                        }
+                    ]
+                },
+                    attr = (opt) ? extend(def, opt) : def;
+                attr = (auto_responsive === false) ? extend(attr, { responsive: false }) : attr;
+
+                $(this).DataTable(attr);
+            });
+        }
+
+        listTransaksi = $(elm).DataTable();
+
+        // $('#modalProcess').modal('show');
+        
+    },
+    DataBind: function (data) {
+        listTransaksi.clear().rows.add(data).draw();
+        listTransaksi.columns.adjust();
+    }
+}

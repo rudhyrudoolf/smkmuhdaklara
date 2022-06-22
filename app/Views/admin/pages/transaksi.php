@@ -26,13 +26,13 @@
                     <div class="form-row align-items-center">
                         <div class="col-auto">
                             <label class="sr-only" for="periodFrom">Period From</label>
-                            <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom">
+                            <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom" value="<?= $periodFrom ?>">
                         </div>
                         <span>-</span>
                         <div class="col-auto">
                             <label class="sr-only" for="periodTo">Period To</label>
                             <div class="input-group mb-2">
-                                <input class="form-control datepicker" id="periodTo" name="txtperidoTo">
+                                <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $periodTo ?>">
                             </div>
                         </div>
                         <div class="col-auto">
@@ -78,28 +78,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        $no = 1;
-                        foreach ($listTransaksi as $row) : ?>
-                            <tr>
-                                <td><?= $no++ ?></td>
-                                <td><?= $row['nis'] ?></td>
-                                <td><?= $row['nama'] ?></td>
-                                <td><?= number_format($row['debit'], 2, ',', '.') ?></td>
-                                <td><?= number_format($row['kredit'], 2, ',', '.') ?></td>
-                                <td><?= number_format($row['saldo'], 2, ',', '.') ?></td>
-                                <td><?= $row['sandi'] ?></td>
-                                <td><?= $row['created_by'] ?></td>
-                                <td><?= $row['created_dt'] ?></td>
-                                <td style="display: none;"><?= $row['norek'] ?></td>
-
-                                <td>
-                                    <button type="button" id="btnEdit" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

@@ -13,10 +13,12 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/vendors/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('/assets/lib/select2/css/select2.min.css') ?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="<?= base_url('/assets/lib/sweetalert2/sweetalert2.min.css') ?>">
+
     <style>
         .pull-left {
             float: left !important;
@@ -85,16 +87,17 @@
     </a>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+    <script src="<?= base_url('assets/vendors/jquery/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('assets/vendors/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
     <!-- Core plugin JavaScript-->
-    <script src="<?= base_url('assets/vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
+    <script src="<?= base_url('assets/vendors/jquery-easing/jquery.easing.min.js') ?>"></script>
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url('assets/js/sb-admin-2.min.js') ?>"></script>
     <!-- Page level plugins -->
     <script src="<?= base_url('/assets/vendors/datatables/jquery.dataTables.min.js') ?>"></script>
     <script src="<?= base_url('/assets/vendors/datatables/dataTables.bootstrap4.min.js') ?>"></script>
     <script src="<?= base_url('/assets/lib/select2/js/select2.js') ?>"></script>
+    <script src="<?= base_url('/assets/lib/sweetalert2/sweetalert2.min.js') ?>"></script>
     <script src="<?= base_url('/assets/lib/bootbox/js/bootbox.min.js') ?>"></script>
     <script src="<?= base_url('/assets/js/shared/global.js') ?>"></script>
     <script src="<?= base_url('/assets/js/shared/dataTables.rowsGroup.js') ?>"></script>

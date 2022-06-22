@@ -6,6 +6,16 @@ $(document).ready(function () {
     });
 });
 
+$("#viewdetailsaldo").click(function(){
+    debugger;
+    var periodFrom = $("#periodFrom").val();
+    var periodTo = $("#periodTo").val();
+    var url = BASE_URL+'/infosaldo/'+periodFrom+'/'+periodTo;
+    
+    window.open(url,'_self');
+    
+});
+
 
 $("#searchData").click(function () { 
    var periodFrom = $("#periodFrom").val();
