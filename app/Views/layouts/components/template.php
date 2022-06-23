@@ -13,11 +13,17 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/vendors/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
+    <!-- <link href="<?= base_url('assets/vendors/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet"> -->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/fc-4.1.0/fh-3.2.4/r-2.3.0/rg-1.2.0/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/datatables.min.css"/>
+ 
     <link href="<?= base_url('/assets/lib/select2/css/select2.min.css') ?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= base_url('/assets/lib/sweetalert2/sweetalert2.min.css') ?>">
+
+    
+
 
     <style>
         .pull-left {
@@ -94,7 +100,9 @@
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url('assets/js/sb-admin-2.min.js') ?>"></script>
     <!-- Page level plugins -->
-    <script src="<?= base_url('/assets/vendors/datatables/jquery.dataTables.min.js') ?>"></script>
+    <!-- <script src="<?= base_url('/assets/vendors/datatables/jquery.dataTables.min.js') ?>"></script> -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/fc-4.1.0/fh-3.2.4/r-2.3.0/rg-1.2.0/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/datatables.min.js"></script>
+
     <script src="<?= base_url('/assets/vendors/datatables/dataTables.bootstrap4.min.js') ?>"></script>
     <script src="<?= base_url('/assets/lib/select2/js/select2.js') ?>"></script>
     <script src="<?= base_url('/assets/lib/sweetalert2/sweetalert2.min.js') ?>"></script>
@@ -102,6 +110,7 @@
     <script src="<?= base_url('/assets/js/shared/global.js') ?>"></script>
     <script src="<?= base_url('/assets/js/shared/dataTables.rowsGroup.js') ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     <script type="text/javascript">
         var BASE_URL = "<?= base_url() ?>"

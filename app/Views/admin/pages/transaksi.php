@@ -66,6 +66,7 @@
                         <tr>
                             <th>#</th>
                             <th>NIS</th>
+                            <th>Jenis Tabungan</th>
                             <th>Nama</th>
                             <th>Debit</th>
                             <th>Kredit</th>

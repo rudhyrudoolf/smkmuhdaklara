@@ -16,7 +16,7 @@ class TransaksiModel extends Model
     protected $createdField  = '';
     protected $updatedField  = '';
 
-    public function addData($param)
+    public function addData($param, $flag)
     {
         $kredit = intval($param['kredit']);
         $debit = intval($param['debit']);
@@ -42,7 +42,7 @@ class TransaksiModel extends Model
             'debit' => $debit,
             'kredit' => $kredit,
             'saldo' => $saldo,
-            'sandi' => $param['sandi'],
+            'sandi' => $flag == 'insert' ? $param['sandi'] : 6,
             'created_by' => session()->get('userid')
         ];
         $this->createdField = 'created_dt';
@@ -50,11 +50,13 @@ class TransaksiModel extends Model
         return $data;
     }
 
-    public function getdata($periodFrom,$periodTo)
+    public function getdata($periodFrom,$periodTo)  
     {
-        $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,tmn.id as norek ,t.created_by ,t.created_dt  from transaksi t
+        $query = "select t.nis, sys.systemDesc, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,tmn.id as norek ,t.created_by ,t.created_dt  from transaksi t
         INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
-        WHERE CAST(t.created_dt AS DATE) between ? ANd ?";
+        INNER JOIN tblsystem sys ON tmn.jenis_tabungan = sys.systemCode 
+        WHERE CAST(t.created_dt AS DATE) between ? ANd ?
+        ORDER BY tmn.nama asc, t.created_dt asc ";
 
         $data = $this->db->query($query,[$periodFrom, $periodTo])->getResultArray();
         return $data;
@@ -65,7 +67,8 @@ class TransaksiModel extends Model
         $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,tmn.id as norek ,t.created_by ,t.created_dt  from transaksi t
         INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
         WHERE CAST(t.created_dt AS DATE) between ? ANd ? 
-        ORDER BY tmn.nama";
+        ORDER BY tmn.nama
+        ";
 
         $data = $this->db->query($query, [$periodFrom, $periodTo])->getResultArray();
         return $data;

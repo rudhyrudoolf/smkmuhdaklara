@@ -39,7 +39,7 @@ class Transaksi extends BaseController
 
     public function index()
     {
-        $periodfrom  = date('Y-m-d', strtotime('-7 day', strtotime($this->date)));
+        $periodfrom  = date('Y-m-d', strtotime('-1 day', strtotime($this->date)));
         $periodTo = $this->date;
 
         $data = [
@@ -83,11 +83,9 @@ class Transaksi extends BaseController
     {
         $params = $this->request->getPost();
 
-        if ($this->request->getPost('flag') == 'insert')
-            $data = $this->transaksiModel->addData($params);
-        else
-            $data = $this->transaksiModel->editdata($params);
-
+        $flag = $this->request->getPost('flag');
+        $data = $this->transaksiModel->addData($params,$flag);
+       
         if (!$data) {
 
             $response = [
