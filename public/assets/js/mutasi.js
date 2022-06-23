@@ -10,6 +10,7 @@ $(document).ready(function(){
 
     });
     MutasiTable.Init('#tblmutasi');
+
     $('.dataTables_filter').addClass('pull-left');
     $('.dataTables_paginate').addClass('pull-left');
 })
@@ -22,8 +23,39 @@ var MutasiTable = {
                 var def = {
                     responsive: true,
                     // scrollY:true,
+                    buttons: [
+                        {
+                            extend: 'print',
+                            text: 'Print current page',
+                            exportOptions: {
+                                modifier: {
+                                    page: 'current'
+                                }
+                            }
+                        }
+                    ],
                     autoWidth: false,
-                    dom: '<"row justify-between g-2"<"col-7 col-sm-6 text-left"f><"col-5 col-sm-6 text-right"<"datatable-filter"l>>><"datatable-wrap my-3"t><"row align-items-center"<"col-7 col-sm-12 col-md-9"p><"col-5 col-sm-12 col-md-3 text-left text-md-right"i>>',
+                    dom: '<"row justify-between g-2"<"col-7 col-sm-6 text-left"B><"col-5 col-sm-6 text-right"<"datatable-filter"l>>><"datatable-wrap my-3"t><"row align-items-center"<"col-7 col-sm-12 col-md-9"p><"col-5 col-sm-12 col-md-3 text-left text-md-right"i>>',
+                    buttons : true,
+                    buttons : [
+                        {
+                            extend:'print',
+                            messageTop: '',
+                            title:'',
+                            pageSize: 'A6',
+                            exportOptions:{
+                                columns:[8,6,3,4,5]
+                            },
+                            customize: function ( win ) {
+                                $(win.document.body).find('table')
+                                 .addClass('compact')
+                                 .css('font-size', '10pt');
+                                 
+                                $(win.document.body).find( 'table > thead' ).remove();
+                            }
+                        }
+
+                    ],
                     "columns" : [
                         {
                             data: null,
@@ -157,7 +189,7 @@ $("#searchData").click(function (e) {
 
     if(app.checkObj.isEmptyNullOrUndefined(norek))
     {
-        errMesg = errMesg+"<li>Kode transaksi tidak bolek kosong</li>"
+        errMesg = errMesg+"<li>Kode transaksi tidak boleh kosong</li>"
         isvalid = false;
     }
     
@@ -165,10 +197,12 @@ $("#searchData").click(function (e) {
     if(app.checkObj.isEmptyNullOrUndefined())
     if(!isvalid)
     {
-        bootbox.alert({
-            title : "<p style='color:red'>Warning!</p>",
-            message: errMesg+ "</ul>"
-        });
+        Swal.fire({
+            icon: 'error',
+            title: errMesg+ "</ul>",
+            showConfirmButton: true,
+            timer: 5000
+          })
         return false;
     }
 

@@ -2,6 +2,7 @@ var flag;
 var flaginput;
 var table;
 var data = [], listTransaksi =[];
+var selectedData = {};
 $(document).ready(function(){
 
     $('.datepicker').datepicker({
@@ -100,29 +101,20 @@ $('#inputNorek').on('select2:select', function (e) {
 });
 
 $("#btnSetorTunaiModal").click(function(){
-    clear()
     flag = 'insert';
     flaginput = "kredit";    
     $("#modaltransaksi").modal('show');
-    $("#lblnominal").text('Jumlah Setor Tunai');
-    $("#transaksilabel").text('Setor Tunai');
-    $("#inputsandi").val('1').prop('disabled',true)
-    $("#inputNorek").prop('disabled',false);
+    
 });
 
 $("#btnTarikTunaiModal").click(function(){
-    clear()
     flag = 'insert';
     flaginput = "debit";    
     $("#modaltransaksi").modal('show');
-    $("#lblnominal").text('Jumlah Tarik Tunai');
-    $("#transaksilabel").text('Tarik Tunai');
-    $("#inputsandi").val('2').prop('disabled',true);
-    $("#inputNorek").prop('disabled',false);
-})
+});
 
 $("#savedata").click(function(){
-    
+    debugger
     if(populateData())
     {
         var params = {
@@ -220,28 +212,62 @@ function clear()
     $("#inputnominal").val('');
 }
 
-$('#tbltransaksi tbody').on('click', '#btnEdit', function () {
-    flag = "update";
-    var data_row = table.row( $(this).parents('tr') ).data(); // here is the change
-    console.log(data_row);
-   $("#modaltransaksi").modal('show');
+// $('#tbltransaksi tbody').on('click', '#btnEdit', function () {
+//     flag = "update";
+//     var data_row = table.row( $(this).parents('tr') ).data(); // here is the change
+//     console.log(data_row);
+//    $("#modaltransaksi").modal('show');
   
-   $('#modaltransaksi').on('shown.bs.modal', function() {
+//    $('#modaltransaksi').on('shown.bs.modal', function() {
 
-        $("#inputNorek").val(data_row[9]).trigger("change");
-        $("#inputNorek").prop('disabled',true);
-        $("#inputNorek").change(function() {
-            console.log('on country change');
-            });
-        $('#inputnis').val(data_row[1])
-        $('#inputnama').val(data_row[2]).attr('readonly',false);
-        $('#inputnominal').val(data_row[3] == 0 ? data_row[4] : data_row[3]).attr('readonly',false);
-        $("#inputsandi").val(data_row[6]);
+//         $("#inputNorek").val(data_row[9]).trigger("change");
+//         $("#inputNorek").prop('disabled',true);
+//         $("#inputNorek").change(function() {
+//             console.log('on country change');
+//             });
+//         $('#inputnis').val(data_row[1])
+//         $('#inputnama').val(data_row[2]).attr('readonly',false);
+//         $('#inputnominal').val(data_row[3] == 0 ? data_row[4] : data_row[3]).attr('readonly',false);
+//         $("#inputsandi").val(data_row[6]);
 
         
-   });
+//    });
   
-  });
+//   });
+
+  
+   $('#modaltransaksi').on('shown.bs.modal', function() {
+        clear();
+        if(flag == 'update')
+        {
+            var data = selectedData;
+            $("#inputNorek").val(data.norek).trigger("change");
+            $("#inputNorek").prop('disabled',true);
+            $("#inputNorek").change(function() {
+                console.log('on country change');
+                });
+            $('#inputnis').val(data.nis)
+            $('#inputnama').val(data.nama).attr('readonly',false);
+            $('#inputjenistabungan').val(data.systemDesc);
+            $('#inputnominal').val(data.kredit != '0' ? data.kredit : data.debit).attr('readonly',false);
+            $("#inputsandi").val(data.sandi).attr('disabled',true);
+            flaginput = data.sandi == '1' ? 'kredit' : 'debit';
+        }
+        if(flaginput == 'debit')
+        {
+            $("#lblnominal").text('Jumlah Tarik Tunai');
+            $("#transaksilabel").text('Tarik Tunai');
+            $("#inputsandi").val('2').prop('disabled',true);
+            $("#inputNorek").prop('disabled',false);
+        }else if(flaginput == 'kredit')
+        {
+            $("#lblnominal").text('Jumlah Setor Tunai');
+            $("#transaksilabel").text('Setor Tunai');
+            $("#inputsandi").val('1').prop('disabled',true)
+            $("#inputNorek").prop('disabled',false);
+        }
+        
+   });
 
   $("#searchData").click(function () { 
     var periodFrom = $("#periodFrom").val();
@@ -359,6 +385,15 @@ $('#tbltransaksi tbody').on('click', '#btnEdit', function () {
                         {
                             data: null,
                             "className": "nk-tb-col text-left",
+                            visible : false,
+                            render: function (data, type, row, meta) {
+                                debugger
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.systemDesc) ? row.systemDesc : '') + '</span>';
+                            }
+                        },
+                        {
+                            data: null,
+                            "className": "nk-tb-col text-left",
                             render: function (data, type, row, meta) {
                                 return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.nama) ? row.nama : '') + '</span>';
                             }
@@ -401,6 +436,7 @@ $('#tbltransaksi tbody').on('click', '#btnEdit', function () {
                         {
                             data: null,
                             "className": "nk-tb-col text-left",
+
                             render: function (data, type, row, meta) {
                                 return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.created_dt) ? row.created_dt : '') + '</span>';
                             }
@@ -411,7 +447,7 @@ $('#tbltransaksi tbody').on('click', '#btnEdit', function () {
                             "className": "nk-tb-col text-center",
                             render: function (data, type, row) {
                                
-                                var html = '<button type="button" id="searchData" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i</button>';
+                                var html = '<button type="button" id="btEdit" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i</button>';
                                 return html;
                             }
                         }
@@ -427,6 +463,13 @@ $('#tbltransaksi tbody').on('click', '#btnEdit', function () {
         listTransaksi = $(elm).DataTable();
 
         // $('#modalProcess').modal('show');
+        $(elm + ' tbody').off().on('click', 'button#btEdit', function (e) {
+            
+            $("#modaltransaksi").modal('show');
+            flag = "update"
+            selectedData = $(elm).DataTable().row($(this).parents('tr')).data();
+
+        });
         
     },
     DataBind: function (data) {

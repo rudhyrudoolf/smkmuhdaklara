@@ -34,7 +34,7 @@ class Infosaldo extends BaseController
 
             $periodfrom  = date('Y-m-d', strtotime('-7 day', strtotime($this->date)));
             $periodTo = $this->date;
-            dd($paramperiodFrom);
+            //dd($paramperiodFrom);
             
             $data = [
                 'title' => 'Info Saldo',
