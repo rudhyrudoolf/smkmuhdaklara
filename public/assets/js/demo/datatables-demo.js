@@ -244,9 +244,9 @@ var GetData = {
       dataType: "JSON",
       success: function (response) {
         if(response){
-          Swal.fire('delete!', '', 'success')
+          Swal.fire('Data berhasil di hapus!', '', 'success')
         }else{
-          Swal.fire('delete!', '', 'error')
+          Swal.fire('Data Gagal di hapus!', '', 'error')
         }
           GetData.Init();
           
