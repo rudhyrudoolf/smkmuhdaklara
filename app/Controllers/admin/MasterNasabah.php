@@ -40,8 +40,25 @@ class MasterNasabah extends BaseController
             'listNasabah' => $this->nasabahModel->getData()
         ];
 
-
         return view('admin/pages/nasabah', $data);
+    }
+
+    public function getDataInit()
+    {
+        $data = [
+            'listNasabah' => $this->nasabahModel->getData()
+        ];
+
+        echo json_encode($data);
+    }
+
+    public function deleteData()
+    {
+        $id = $this->request->getPost('id');
+
+        $data = $this->nasabahModel->deleteData($id);
+
+        echo $data;
     }
 
     public function getdatadetailNasabah()

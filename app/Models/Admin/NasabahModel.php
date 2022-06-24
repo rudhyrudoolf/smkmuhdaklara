@@ -17,6 +17,16 @@ class NasabahModel extends Model
 
     protected $validationRules    = [];
 
+    public function deleteData($id){
+
+        $data = [
+            "id" => $id
+        ];
+        $data = $this->delete($data);
+
+        return $data;
+    }
+
     public function getNewNis($param)
     {
         $query = "select CONCAT('$param', RIGHT (CONCAT('0000', IFNULL(Max(RIGHT (nis,4)),0)+1),4)) as nis  FROM  TB_M_NASABAH where jenis_tabungan = :params:";

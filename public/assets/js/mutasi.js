@@ -13,7 +13,8 @@ $(document).ready(function(){
 
     $('.dataTables_filter').addClass('pull-left');
     $('.dataTables_paginate').addClass('pull-left');
-})
+});
+
 var MutasiTable = {
     Init: function (elm,opt) {
         if ($(elm).length > 0) {
