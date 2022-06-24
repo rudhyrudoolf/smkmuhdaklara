@@ -35,6 +35,8 @@ $routes->get('/', 'Login::index', ['filter' => 'auth']);
 $routes->get('/home', 'Home::index', ['filter' => 'auth']);
 $routes->get('/home/filter', 'Home::searchdata', ['filter' => 'auth']);
 $routes->get('/nasabah', 'admin\MasterNasabah::index', ['filter' => 'auth']);
+$routes->get('/nasabah/Init', 'admin\MasterNasabah::getDataInit', ['filter' => 'auth']);
+$routes->post('/nasabah/delete', 'admin\MasterNasabah::deleteData', ['filter' => 'auth']);
 $routes->post('/nasabah/save', 'admin\MasterNasabah::savedata');
 $routes->get('/infosaldo/(:any)', 'admin\InfoSaldo::index/$1');
 $routes->get('/infosaldo', 'admin\InfoSaldo::index', ['filter' => 'auth']);

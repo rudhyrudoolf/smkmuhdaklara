@@ -442,6 +442,15 @@ function clear()
                             }
                         },
                         {
+                            data: null,
+                            visible:false,
+                            "className": "nk-tb-col text-left",
+
+                            render: function (data, type, row, meta) {
+                                return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.created_dt) ? row.created_dt : '') + '</span>';
+                            }
+                        },
+                        {
                             //width: '10vw',
                             data: null,
                             "className": "nk-tb-col text-center",

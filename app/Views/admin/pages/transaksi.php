@@ -74,7 +74,7 @@
                             <th>Sandi</th>
                             <th>Petugas</th>
                             <th>Tanggal</th>
-                            <th style="display: none;">norek</th>
+                            <th>norek</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
