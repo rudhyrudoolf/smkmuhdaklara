@@ -23,36 +23,35 @@ var MutasiTable = {
                 var auto_responsive = $(this).data('auto-responsive');
                 var def = {
                     responsive: true,
-                    // scrollY:true,
-                    buttons: [
-                        {
-                            extend: 'print',
-                            text: 'Print current page',
-                            exportOptions: {
-                                modifier: {
-                                    page: 'current'
-                                }
-                            }
-                        }
-                    ],
                     autoWidth: false,
                     dom: '<"row justify-between g-2"<"col-7 col-sm-6 text-left"B><"col-5 col-sm-6 text-right"<"datatable-filter"l>>><"datatable-wrap my-3"t><"row align-items-center"<"col-7 col-sm-12 col-md-9"p><"col-5 col-sm-12 col-md-3 text-left text-md-right"i>>',
                     buttons : true,
                     buttons : [
                         {
                             extend:'print',
+                            text: 'Cetak',
                             messageTop: '',
+                            className : 'btn btn-md btn-info',
                             title:'',
-                            pageSize: 'A6',
+                            pageSize: '5.9in 6.10in',
                             exportOptions:{
-                                columns:[8,6,3,4,5]
+                                columns:[0,8,6,3,4,5,7]
                             },
                             customize: function ( win ) {
-                                $(win.document.body).find('table')
-                                 .addClass('compact')
-                                 .css('font-size', '10pt');
+                                $(win.document.body).find('table').addClass('compact').css('font-size', '12pt');
+                                $(win.document.body).find('table').addClass('compact').css('color', 'green');
+                                $(win.document.body).find('table').css('border', '0px solid #000');
+                                $(win.document.body).find('table td').css('border-left', '0px solid #000');
+                                $(win.document.body).find('table td').css('border-top', '0px solid #000');
+                                $(win.document.body).find('table td').css('border-right', '0px solid #000');
+                                $(win.document.body).find('table td').css('border-bottom', '0px solid #000');
                                  
                                 $(win.document.body).find( 'table > thead' ).remove();
+
+                                $(win.document.body).find('td:nth-child(1)').css('width','40px');
+                                $(win.document.body).find('td:nth-child(2)').css('width','60px');
+                                $(win.document.body).find('td:nth-child(3)').css('width','40px');
+                                
                             }
                         }
 
@@ -188,11 +187,11 @@ $("#searchData").click(function (e) {
         isvalid = false;
     }
 
-    if(app.checkObj.isEmptyNullOrUndefined(norek))
-    {
-        errMesg = errMesg+"<li>Kode transaksi tidak boleh kosong</li>"
-        isvalid = false;
-    }
+    // if(app.checkObj.isEmptyNullOrUndefined(norek))
+    // {
+    //     errMesg = errMesg+"<li>Kode transaksi tidak boleh kosong</li>"
+    //     isvalid = false;
+    // }
     
 
     if(app.checkObj.isEmptyNullOrUndefined())
@@ -220,7 +219,7 @@ function searchdata()
     $.ajax({
         type: "GET",
         url: BASE_URL+'/mutasi/searchdata',
-        data: { norek: norek, kodeTransaksi: kodeTransaksi},
+        data: { norek: norek, periodFrom :periodFrom, periodTo : periodTo},
         dataType: "json",
         success: function (response) {
             console.log(response)

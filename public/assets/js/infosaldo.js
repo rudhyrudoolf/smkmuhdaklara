@@ -23,19 +23,16 @@ var InfoSaldoTable = {
                 var def = {
                     responsive: true,
                     // scrollY:true,
+                    autoWidth: false,
+                    dom: '<"row justify-between g-2"<"col-2 col-sm-2 text-left"B><"col-4 col-sm-4 text-left"f><"col-5 col-sm-6 text-right"<"datatable-filter"l>>><"datatable-wrap my-3"t><"row align-items-center"<"col-7 col-sm-12 col-md-9"p><"col-5 col-sm-12 col-md-3 text-left text-md-right"i>>',
+                    buttons:true,
                     buttons: [
                         {
-                            extend: 'print',
-                            text: 'Print current page',
-                            exportOptions: {
-                                modifier: {
-                                    page: 'current'
-                                }
-                            }
+                            extend: 'pdf',
+                            text: 'Save PDF',
+                            footer: true
                         }
                     ],
-                    autoWidth: false,
-                    dom: '<"row justify-between g-2"<"col-7 col-sm-6 text-left"f><"col-5 col-sm-6 text-right"<"datatable-filter"l>>><"datatable-wrap my-3"t><"row align-items-center"<"col-7 col-sm-12 col-md-9"p><"col-5 col-sm-12 col-md-3 text-left text-md-right"i>>',
                     "columns" : [
                         {
                             data: null,
@@ -112,6 +109,7 @@ var InfoSaldoTable = {
                         {
                             //width: '10vw',
                             data: null,
+                            visible: true,
                             "className": "nk-tb-col text-center",
                             render: function (data, type, row) {
 

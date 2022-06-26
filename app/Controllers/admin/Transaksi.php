@@ -39,7 +39,7 @@ class Transaksi extends BaseController
 
     public function index()
     {
-        $periodfrom  = date('Y-m-d', strtotime('-1 day', strtotime($this->date)));
+        $periodfrom  = date('Y-m-d', strtotime('-0 day', strtotime($this->date)));
         $periodTo = $this->date;
 
         $data = [

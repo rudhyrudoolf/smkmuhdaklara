@@ -56,25 +56,15 @@
                             <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $period ?>">
                         </div>
                     </div>
-
-                    <div class="text-xs font-weight-bold text-primary text-uppercase col-md-2">
-                        <p class="text-center"> Kode Transaksi Terakhir </p>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="kodetransaksi">
-                        <div class="invalid-feedback">
-                            Please provide a valid state.
-                        </div>
-                    </div>
                 </div>
                 <br>
-                <button type="button" id="searchData" class="btn btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
+                <button type="button" id="searchData" class="btn btn-md btn-primary">
+                    <!-- <span class="icon text-white-50">
                         <i class="fas fa-search"></i>
-                    </span>
+                    </span> -->
                     <span class="text">Cari</span>
                 </button>
-                <button class="btn btn-info btn-icon-split">
+                <button class="btn btn-info btn-icon-split" id="print">
                     <span class="icon text-white-50">
                         <i class="fas fa-print"></i>
                     </span>
