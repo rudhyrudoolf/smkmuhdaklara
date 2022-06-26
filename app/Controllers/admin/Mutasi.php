@@ -39,8 +39,9 @@ class Mutasi extends BaseController
     public function searchData()
     {
         $norek = $this->request->getGet('norek');
-        $kodeTransaksi = $this->request->getGet('kodeTransaksi');
-        $data = $this->transaksiModel->searchDataMutasi($norek, $kodeTransaksi);
+        $periodFrom = $this->request->getGet('periodFrom');
+        $periodTo = $this->request->getGet('periodTo');
+        $data = $this->transaksiModel->searchDataMutasi($norek,$periodFrom,$periodTo);
 
         echo json_encode($data);
         die;

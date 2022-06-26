@@ -102,13 +102,13 @@ class TransaksiModel extends Model
         return $result->getFirstRow();
     }
 
-    public function searchDataMutasi($norek, $kodeTransaksi)
+    public function searchDataMutasi($norek, $periodFrom,$periodTo)
     {
-        $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,t.nomor_rekening as norek ,t.created_by ,t.created_dt  from transaksi t
+        $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,t.nomor_rekening as norek ,t.created_by ,DATE_FORMAT(t.created_dt,'%d/%m/%Y') created_dt  from transaksi t
         INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
-        WHERE t.nomor_rekening = ? AND t.idtransaksi > ?";
+        WHERE t.nomor_rekening = ? AND CAST(t.created_dt as DATE) BETWEEN ? AND ? ";
 
-        $data = $this->db->query($query, [$norek, $kodeTransaksi])->getResultArray();
+        $data = $this->db->query($query, [$norek, $periodFrom,$periodTo])->getResultArray();
         return $data;
     }
 }
