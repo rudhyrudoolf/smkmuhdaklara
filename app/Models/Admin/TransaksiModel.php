@@ -47,6 +47,7 @@ class TransaksiModel extends Model
         ];
         $this->createdField = 'created_dt';
         $data = $this->save($data);
+        if($data) $data = $this->getInsertID();
         return $data;
     }
 
@@ -102,13 +103,29 @@ class TransaksiModel extends Model
         return $result->getFirstRow();
     }
 
-    public function searchDataMutasi($norek, $periodFrom,$periodTo)
+    public function searchDataMutasi($norek, $periodFrom,$periodTo,$idTransaksi)
+    {
+        $query = "select t.nis,t.idtransaksi, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,t.nomor_rekening as norek ,t.created_by ,DATE_FORMAT(t.created_dt,'%d/%m/%Y') created_dt  from transaksi t
+        INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
+        WHERE t.nomor_rekening = :norek: AND CAST(t.created_dt as DATE) BETWEEN :periodFrom: AND :periodTo: AND (:id: is null or t.idtransaksi = :id:)";
+        
+        $bind = [
+            'norek' =>  $norek,
+            'periodFrom' => $periodFrom,
+            'periodTo' => $periodTo,
+            'id' => $idTransaksi == '' ? null : $idTransaksi
+        ];
+        $data = $this->db->query($query, $bind)->getResultArray();
+        return $data;
+    }
+
+    public function searchDataMutasiById($id)
     {
         $query = "select t.nis, tmn.nama,t.debit, t.kredit ,t.saldo, t.sandi,t.nomor_rekening as norek ,t.created_by ,DATE_FORMAT(t.created_dt,'%d/%m/%Y') created_dt  from transaksi t
         INNER JOIN TB_M_NASABAH tmn ON t.nis = tmn.nis
-        WHERE t.nomor_rekening = ? AND CAST(t.created_dt as DATE) BETWEEN ? AND ? ";
+        WHERE t.idtransaksi = ? ";
 
-        $data = $this->db->query($query, [$norek, $periodFrom,$periodTo])->getResultArray();
+        $data = $this->db->query($query, [$id])->getResultArray();
         return $data;
     }
 }

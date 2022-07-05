@@ -48,6 +48,8 @@ $routes->post('/transaksi/savedata', 'admin\Transaksi::savedata');
 $routes->get('/mutasi', 'admin\Mutasi::index', ['filter' => 'auth']);
 $routes->get('/transaksi/searchdata', 'admin\InfoSaldo::searchData', ['filter' => 'auth']);
 $routes->get('/mutasi/searchdata', 'admin\Mutasi::searchData', ['filter' => 'auth']);
+$routes->get('/print/(:any)', 'admin\Mutasi::SearchTransaksi/$1', ['filter' => 'auth']);
+$routes->get('/print2/(:any)', 'admin\MasterNasabah::print/$1', ['filter' => 'auth']);
 
 
 

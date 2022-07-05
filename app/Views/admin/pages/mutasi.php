@@ -18,65 +18,99 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form>
-                <div class="form-row align-items-center">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase col-md-1">
-                        <p class="text-center">rekening</p>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <input class="form-control" id="inputNorek" required>
-                    </div>
-                    <div class="text-xs font-weight-bold text-primary text-uppercase col-md-1">
-                        <p class="text-center">NIS</p>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <input type="text" class="form-control" id="inputnis" disabled required>
-                    </div>
-                    <div class="text-xs font-weight-bold text-primary pull-right text-uppercase col-md-1">
-                        <p class="text-center">nama</p>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputnama" disabled aria-describedby="inputGroupPrepend" required>
+                <div class="row col-md-12 align-items-center">
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase col-md-3">
+                                <p class="text-right">rekening</p>
+                            </div>
+                            <div class="col-md-9 mb-9">
+                                <input class="form-control" id="inputNorek" >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase col-md-3">
+                                <p class="text-right">Periode</p>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- <label class="sr-only" for="periodFrom">Period From</label> -->
+                                <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom" value="<?= $period ?>">
+                            </div>
+                            <span class="col-sm-1 align-items-center">
+                                <p class="text-center"> - </p>
+                            </span>
+                            <div class="col-md-4">
+                                <!-- <label class="sr-only" for="periodTo">Period To</label> -->
+                                <div class="input-group mb-2">
+                                    <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $period ?>">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row align-items-center">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase col-md-1">
-                        <p class="text-center"> Periode </p>
-                    </div>
-                    <div class="col-auto">
-                        <label class="sr-only" for="periodFrom">Period From</label>
-                        <input class="form-control mb-2 datepicker" id="periodFrom" name="txtperiodFrom" value="<?= $period ?>">
-                    </div>
-                    <span>-</span>
-                    <div class="col-auto">
-                        <label class="sr-only" for="periodTo">Period To</label>
-                        <div class="input-group mb-2">
-                            <input class="form-control datepicker" id="periodTo" name="txtperidoTo" value="<?= $period ?>">
+
+                    <div class=" col-md-4">
+                        <div class="form-group row">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase col-md-4">
+                                <p class="text-right">Nama</p>
+                            </div>
+                            <div class="col-md-8 mb-8">
+                            <input type="text" class="form-control" id="inputnama" disabled aria-describedby="inputGroupPrepend" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase col-md-4">
+                                <p class="text-right">Id Transaksi</p>
+                            </div>
+                            <div class="col-md-8 mb-8">
+                                <input type="text" class="form-control" id="idTransaksi" >
+                            </div>
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <!-- <div class="form-group row">
+                            <div class="text-xs font-weight-bold text-primary pull-right text-uppercase col-md-4">
+                                <p class="text-right">nama</p>
+                            </div>
+                            <div class="col-md-8 mb-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="inputnama" disabled aria-describedby="inputGroupPrepend" >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row h-25">
+                            <div class="text-xs font-weight-bold text-primary pull-right text-uppercase col-md-4">
+                             <p class="text-right">nama</p>
+                            </div>
+                            <div class="col-md-8 mb-8">
+                                <div class="input-group">
+                                     <input type="text" class="form-control" id="inputnama" disabled aria-describedby="inputGroupPrepend" >
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
-                <br>
-                <button type="button" id="searchData" class="btn btn-md btn-primary">
-                    <!-- <span class="icon text-white-50">
-                        <i class="fas fa-search"></i>
-                    </span> -->
-                    <span class="text">Cari</span>
-                </button>
-                <button class="btn btn-info btn-icon-split" id="print">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-print"></i>
-                    </span>
-                    <span class="text">Cetak</span>
-                </button>
                 <!-- <button class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-file"></i>
                     </span>
                     <span class="text">Export</span>
                 </button> -->
-            </form>
+                <button id="searchData" class="btn btn-primary btn-icon-spli">
+                   <span class="icon text-white-50">
+                       <i class="fas fa-search"></i>
+                   </span>
+                   <span class="text">Cari</span>
+               </button>
+               <button class="btn btn-info btn-icon-split" id="generate">
+                   <span class="icon text-white-50">
+                       <i class="fas fa-print"></i>
+                   </span>
+                   <span class="text">Cetak</span>
+               </button>
+            
         </div>
     </div>
 
@@ -88,6 +122,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>ID Transaksi</th>
                             <th>NIS</th>
                             <th>Nama</th>
                             <th>Debit</th>

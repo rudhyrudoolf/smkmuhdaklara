@@ -25,8 +25,12 @@ class MasterNasabah extends BaseController
     {
         $this->systemModel = new SystemModel();
         $this->nasabahModel = new NasabahModel();
+        $this->print = new Mutasi();
         $this->dropdownJenisKelamin = $this->systemModel->getDataSystem($this->paramjenisJeniskelamin);
         $this->dropdownJenistabungan = $this->systemModel->getDataSystem($this->paramjenisTabungan);
+
+        $session = \Config\Services::session();
+        $session->set('title','Nasabah');
     }
 
 
@@ -121,5 +125,19 @@ class MasterNasabah extends BaseController
             echo json_encode($response);
             die;
         }
+    }
+
+    public function print($norek,$nama,$alamat,$nis)
+    {
+        $listdata = [
+            'flag' => 'nasabah',
+            'norek' => $norek,
+            'nama' => $nama,
+            'alamat' => $alamat,
+            'nis' => $nis
+        ];
+
+        $this->generate($listdata);
+
     }
 }

@@ -35,6 +35,9 @@ class Transaksi extends BaseController
         $myTime->setTimezone(new DateTimeZone('asia/jakarta'));
 
         $this->date = strval($myTime->format("Y-m-d"));
+
+        $session = \Config\Services::session();
+        $session->set('title','Transaksi');
     }
 
     public function index()
@@ -93,6 +96,8 @@ class Transaksi extends BaseController
                 'content' => $data
             ];
         } else {
+            // get id transaksi for print
+            
             $response = [
                 'title' => 'success',
                 'content' => $data

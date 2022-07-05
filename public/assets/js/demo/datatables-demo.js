@@ -386,8 +386,8 @@ var NasabahTable = {
                           "className": "nk-tb-col text-center",
                           render: function (data, type, row) {
                              
-                              var html = ' <button type="button" data-toggle="modal"  data-target="#modalNasabah" id="btnview" class="btn btn-sm btn-info">\
-                              <i class="fas fa-eye"></i>\
+                              var html = ' <button type="button" id="btnprint" class="btn btn-sm btn-info">\
+                              <i class="fas fa-print"></i>\
                             </button>\
                             <button type="button" data-toggle="modal" data-target="#modalNasabah" id="btnEdit" class="btn btn-trigger btn-sm btn-primary">\
                               <i class="fas fa-edit"></i>\
@@ -410,11 +410,18 @@ var NasabahTable = {
       listNasabah = $(elm).DataTable();
       
       // $('#modalProcess').modal('show');
-      $(elm + ' tbody').off().on('click', 'button#btnview', function (e) {
-          debugger
-         // $("#modalNasabah").modal('show');
-          flag = "view"
+      $(elm + ' tbody').off().on('click', 'button#btnprint', function (e) {
+         
           selectedData = $(elm).DataTable().row($(this).parents('tr')).data();
+          
+          console.log(selectedData);
+
+          var norek = selectedData.nomor_rekening;
+          var nama = selectedData.Nama;
+          var alamat = selectedData.Alamat;
+          var nis = selectedData.nis;
+          var url = BASE_URL+'/print2/'+norek+'/'+nama+'/'+alamat+'/'+nis;
+          window.open(url,'_blank');
 
       });
 

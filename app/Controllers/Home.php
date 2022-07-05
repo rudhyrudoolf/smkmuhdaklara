@@ -22,6 +22,10 @@ class Home extends BaseController
         $myTime->setTimezone(new DateTimeZone('asia/jakarta'));
 
         $this->date = strval($myTime->format("Y-m-d"));
+
+        $session = \Config\Services::session();
+        $session->set('title','Dashboard');
+
     }
 
     public function index()

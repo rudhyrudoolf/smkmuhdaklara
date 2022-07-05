@@ -105,20 +105,6 @@ var InfoSaldoTable = {
                             render: function (data, type, row, meta) {
                                 return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(data.created_dt) ? data.created_dt : '') + '</span>';
                             }
-                        },
-                        {
-                            //width: '10vw',
-                            data: null,
-                            visible: true,
-                            "className": "nk-tb-col text-center",
-                            render: function (data, type, row) {
-
-                                var html = '<button type="button" id="btnEdit" class="btn btn-sm btn-primary">\
-                                                    <i class="fas fa-eye"></i>\
-                                                    </button>\
-                                                ';
-                                return html;
-                            }
                         }
                     ]
                 },

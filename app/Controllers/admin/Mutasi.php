@@ -24,6 +24,10 @@ class Mutasi extends BaseController
         $myTime->setTimezone(new DateTimeZone('asia/jakarta'));
 
         $this->date = strval($myTime->format("Y-m-d"));
+       
+        $session = \Config\Services::session();
+        $session->set('title','Mutasi');
+
     }
     public function index()
     {
@@ -33,6 +37,7 @@ class Mutasi extends BaseController
             'title' => 'Mutasi',
             'period' => $period
         ];
+        
         return view('admin/pages/mutasi', $data);
     }
 
@@ -41,9 +46,30 @@ class Mutasi extends BaseController
         $norek = $this->request->getGet('norek');
         $periodFrom = $this->request->getGet('periodFrom');
         $periodTo = $this->request->getGet('periodTo');
-        $data = $this->transaksiModel->searchDataMutasi($norek,$periodFrom,$periodTo);
+        $idTrasksi = $this->request->getGet('id');
+        $data = $this->transaksiModel->searchDataMutasi($norek,$periodFrom,$periodTo,$idTrasksi);
 
         echo json_encode($data);
         die;
+    }
+
+    function SearchTransaksi($id = '',$norek ='',$periodFrom = '',$periodTo='')
+    {
+        
+        if(!empty($id) || $id != 0){
+            
+            $data = $this->transaksiModel->searchDataMutasiById($id);
+        }else
+        {
+            if($id == 0)  $id = ''; 
+            // dd($id);
+            $data = $this->transaksiModel->searchDataMutasi($norek,$periodFrom,$periodTo,$id);
+        }
+
+        $listData = [
+            'flag' => 'Mutasi',
+            'listData' => $data
+        ];
+        $this->generate($listData);
     }
 }

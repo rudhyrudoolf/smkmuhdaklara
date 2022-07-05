@@ -8,7 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
-
+use Dompdf\Dompdf;
 /**
  * Class BaseController
  *
@@ -48,5 +48,29 @@ class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+    }
+
+    public function generate($listData)
+    {
+
+        //  dd($listData['flag']);
+        $filename = date('y-m-d-H-i-s'). '-qadr-labs-report';
+
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+
+        // load HTML content
+        $dompdf->loadHtml(view('layouts\components\print',$listData));
+        if($listData['flag'] == 'Mutasi') $paperSize = array(0,0,425.1968503937008,467.7165354330709);
+        else $paperSize = array(0,0,425.1968503937008,233.8582677165355);
+
+        // (optional) setup the paper size and orientation
+        $dompdf->setPaper($paperSize, 'portrait');
+
+        // render html as PDF
+        $dompdf->render();
+
+        // output the generated pdf
+        $dompdf->stream($filename,array("Attachment"=>false));
     }
 }
