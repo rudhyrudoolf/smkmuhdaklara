@@ -61,7 +61,6 @@
                             <th>Sandi</th>
                             <th>Petugas</th>
                             <th>Tanggal</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,7 +71,7 @@
                             <td style="border-color: black !important; border-width: 1px 0px 1px 0px !important; border-style: solid !important; background-color: #E8E8E8"><span id="totaldebit"></span></td>
                             <td style="border-color: black !important; border-width: 1px 0px 1px 0px !important; border-style: solid !important; background-color: #E8E8E8"><span id="totalkredit"></span></td>
                             <td style="border-color: black !important; border-width: 1px 0px 1px 0px !important; border-style: solid !important; background-color: #E8E8E8"><span style="font-weight: bold;" id="totalsaldo"></span></td>
-                            <td style="border-color: black !important; border-width: 1px 0px 1px 0px !important; border-style: solid !important; background-color: #E8E8E8" colspan="4"><span></span></td>
+                            <td style="border-color: black !important; border-width: 1px 0px 1px 0px !important; border-style: solid !important; background-color: #E8E8E8" colspan="3"><span></span></td>
                         </tr>
                     </tfoot>
                 </table>

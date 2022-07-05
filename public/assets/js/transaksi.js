@@ -114,7 +114,7 @@ $("#btnTarikTunaiModal").click(function(){
 });
 
 $("#savedata").click(function(){
-    debugger
+    
     if(populateData())
     {
         var params = {
@@ -131,7 +131,8 @@ $("#savedata").click(function(){
             data: params,
             dataType: "Json",
             success: function (response) {
-                console.log(JSON.stringify(response))
+                debugger
+                console.log(response)
             
                 $("#modaltransaksi").modal('hide');
                 GetData.Init();
@@ -146,7 +147,7 @@ $("#savedata").click(function(){
                     hideClass: {
                         popup: 'animate__animated animate__fadeOutUp'
                       },  
-                    footer: '<a href="'+BASE_URL+'/mutasi'+'">Cetak Buku</a>'
+                    footer: '<a href="'+BASE_URL+'/print/'+response.content+'" target="_blank">Cetak Buku</a>'
                   });
                 }
         });
@@ -273,7 +274,7 @@ function clear()
     var periodFrom = $("#periodFrom").val();
     var periodTo = $("#periodTo").val();
  
-    debugger
+    
  
     if(periodFrom>periodTo)
     {
@@ -292,8 +293,6 @@ function clear()
         },
         dataType: "JSON",
         success: function (response) {
-            console.log('success')
-            console.log(response)
             TransaksiTable.DataBind(response.listTransaksi);
  
         },
@@ -335,7 +334,7 @@ function clear()
  
  var TransaksiTable = {
     Init: function (elm, opt) {
-        debugger
+        
         if ($(elm) !== 'undefined') {
             $(elm).each(function () {
                 var auto_responsive = $(this).data('auto-responsive');
@@ -378,7 +377,7 @@ function clear()
                             data: null,
                             "className": "nk-tb-col text-left",
                             render: function (data, type, row, meta) {
-                                debugger
+                                
                                 return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.nis) ? row.nis : '') + '</span>';
                             }
                         },
@@ -387,7 +386,7 @@ function clear()
                             "className": "nk-tb-col text-left",
                             visible : false,
                             render: function (data, type, row, meta) {
-                                debugger
+                                
                                 return '<span>' + (!app.checkObj.isEmptyNullOrUndefined(row.systemDesc) ? row.systemDesc : '') + '</span>';
                             }
                         },
